@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: roboto;
+  font-optical-sizing: auto;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.roboto-600 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-optical-sizing: auto;
+}
+
+.roboto-700 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-optical-sizing: auto;
+}
+
+.roboto-800 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 800;
+
+}
+
+.roboto-900 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+
+}
+
+
+
+.dancing-script{
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+}
+
+/* Custom tweaks for native date/time/select controls used in chat form */
+input[type="date"], input[type="time"], select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(32%) sepia(66%) saturate(2510%) hue-rotate(210deg) brightness(95%) contrast(95%);
+  cursor: pointer;
+}
+
+input[type="time"]::-webkit-inner-spin-button,
+input[type="time"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+select::-ms-expand { display: none; }

@@ -1,0 +1,353 @@
+{
+  "name_dental": "Nha Khoa Hoàng Bình",
+  "login": "Đăng Nhập",
+  "register": "Đăng Ký",
+  "password": "Mật Khẩu",
+  "fpassword": "Quên Mật Khẩu ?",
+  "email": "Email",
+  "name": "Họ & Tên",
+  "phone": "Số Điện Thoại",
+  "st": "Bạn chưa có tài khoản? Đăng ký ngay",
+  "Home": "Trang Chủ",
+  "About": "Giới Thiệu",
+  "Services": "Dịch Vụ",
+  "cosmetic_porcelain_teeth": "Răng Sứ Thẩm Mỹ",
+  "porcelain_veneer": "Dán Sứ Veneer",
+  "invisalign_orthodontics": "Chinh Nha Invisalign",
+  "individual_implants": "Implant Đơn Lẻ",
+  "full_mouth_dental_implants": "Implant Toàn Hàm",
+  "in_office_zoom_teeth_whitening": "Tẩy Trắng Zoom tại Phòng Khám",
+  "periodontic_gum_diseases": "Điều Trị Nha Chu",
+  "Pricing": "Bảng Giá",
+  "dental_exam_pricing": "Bảng Giá Khám Răng, Tư Vấn & Chụp Hình",
+  "veneer_porcelain_pricing": "Bảng Giá Veneer/Răng Sứ",
+  "minor_surgery_pricing": "Bảng Giá Tiểu Phẫu",
+  "orthodontic_pricing": "Bảng Giá Niềng Răng Truyền Thống & Invisalign",
+  "children_dental_pricing": "Bảng Giá Răng Trẻ Em",
+  "implant_surgery_pricing": "Bẳng Giá Phẫu Thuật Đặt Implant",
+  "fixed_removable_prosthetics_pricing": "Bảng Giá Phục Hình, Cố Định & Tháo Lắp",
+  "Contact": "Liên Hệ",
+  "Special Offers": "Ưu Đãi",
+  "New Products": "Sản phẩm mới",
+  "page_title": "Hành trình tìm lại hơn 100,000 nụ cười và nâng cao chất lượng sống từ 2004",
+  "book_appointment": "Đặt Lịch Hẹn",
+  "book_appointment_free": "Đặt Lịch Ngay",
+  "smile_gallery": "Thư Viện Nụ Cười",
+  "about_us_title": "Hơn 70% khách hàng tìm đến Hoàng Bình thông qua người quen giới thiệu",
+  "about_us_paragraph_1": "Trồng Implant hay gắn sứ thẩm mỹ không chỉ là điều trị nha khoa tức thời. Đây là một sự thay đổi lớn.",
+  "about_us_paragraph_2": "Khách hàng bước ra khỏi Hoàng Bình với sự tự tin và trải nghiệm sống mà họ xứng đáng có.",
+  "about_us_paragraph_3": "Mỗi khách hàng đem đến một câu chuyện mà nhiệm vụ của chúng tôi là giúp các bạn viết tiếp một trang mới tươi sáng hơn, nhiều nụ cười và hạnh phúc hơn.",
+  "book_consultation_now": "Đặt Lịch Hẹn Tư Vấn Ngay",
+  "experience_services": "Trải Nghiệm Các Dịch Vụ Nha Khoa",
+  "smile_design": "Thiết Kế Nụ Cười",
+  "golden_ratio_cosmetic_porcelain_teeth": "Răng Sứ Thẩm Mỹ Tỉ Lệ Vàng",
+  "smile_design1": "Tự nhiên như răng thật",
+  "smile_des1": "Răng sứ của bạn sẽ được các nghệ sĩ Hoàng Bình cá nhân hóa khớp với răng thật một cách tự nhiên. Bạn có thể tùy chọn độ trắng của răng theo ý muốn.",
+  "smile_design2": "Ăn uống không sợ bể xây dựng",
+  "smile_des2": "Sứ Zirconium nhập khẩu từ Đức với công nghệ nung chậm đặc biệt, đạt độ cứng tối đa (1200-1400mpa). Ăn uống thoải mái ngay sau khi gắn răng.",
+  "smile_design3": "Hoàn thành trong 2 ngày",
+  "smile_des3": "Các ca từ 1-4 răng có thể hoàn thành trong 2 ngày và toàn hàm trong 4 ngày. Phòng Lab Inhouse rút ngắn thời gian điều trị tối đa.",
+  "about_panters_implants": "Đối Tác Implant & Nha Khoa",
+  "General Examination Service": "Dịch Vụ Khám Tổng Quát",
+  "Exquisite beauty and practical application": "Nét đẹp tinh tế và tính ứng dụng thực tế",
+  "t_banner_about": "Hoàng Bình luôn hướng mỗi ca điều trị thành một trải nghiệm đáng nhớ cho từng khách hàng - một cách thoải mái nhất, không đau và kết quả ngoài mong đợi. Không chỉ đơn thuần là hàm răng trắng sáng, tôi hướng đến nét đẹp tinh tế của nụ cười, tôn vinh một cách hài hòa vào đường nét trên khuôn mặt của từng khách hàng.",
+  "t_banner_about_1": "Một lần làm, dùng suốt đời.",
+  "t_banner_about_2": "Giảm tối đa hao phí - thời gian, đi lại, môi trường và chi phí",
+  "t_banner_about_3": "Không chỉ là điều trị - đây là trải nghiệm nha khoa",
+  "t_banner_about_4": "Luôn cố gắng đảm bảo giảm thiểu biến chứng và chỉnh sửa sau điều trị",
+  "Core values": "Giá trị cốt lõi",
+  "Core title_1": "Nét Đẹp Tinh Tế & Ứng Dụng Thực Tế",
+  "Core content_1": "Chúng tôi cung cấp các dịch vụ nha khoa với mục đích mang lại các kết quả thực tiễn. Hoang Binh không chỉ quan tâm đến độ chân thật của răng, mà còn là sự hài hòa với khuôn mặt và chức năng ăn nhai cho khách hàng.",
+  "Core title_2": "Công Nghệ Là Yếu Tố Quan Trọng",
+  "Core content_2": "Ưu tiên tính ứng dụng, chất lượng, thời gian và sự tối ưu hóa bằng cách không ngừng đầu tư vào công nghệ, phương pháp và thiết bị chuyên ngành tiên tiến nhất, cũng như đội ngũ nha sĩ và bác sĩ của Hoang Binh.",
+  "Core title_3": "Chất Lượng Cao Hơn Số Lượng",
+  "Core content_3": "Chúng tôi không chạy theo số lượng mà luôn cố gắng tạo ra những trải nghiệm đáng nhớ cho từng khách hàng. Để bạn có thể tự tin giới thiệu cho những người thân yêu của mình đến trao niềm tin tại Hoang Binh.",
+  "Core title_4": "Phát Triển Bền Vững",
+  "Core content_4": "Hoang Binh mang tầm nhìn dài hạn, luôn ý thức về trách nhiệm và nghĩa vụ của doanh nghiệp với môi trường và khách hàng một cách lâu dài. Tích cực bảo vệ môi trường, giảm thiểu rác thải y tế và đảm bảo chất lượng của từng dịch vụ.",
+  "Scan 3D CT": "Công nghệ Scan 3D CT Cone Beam",
+  "Scan3D_content_1": "Công nghệ chụp phim tiên tiến này giúp cung cấp hình ảnh ba chiều của răng, xương, dây thần kinh và thậm chí cả các hốc xoang của bệnh nhân. Hỗ trợ bác sĩ có được cái nhìn tổng quan chi tiết về tình trạng răng của bạn, đơn giản hóa đáng kể quá trình tầm soát và đánh giá.",
+  "Scan3D_content_2": "Chụp phim CT Cone Beam được sử dụng trong hầu hết tất cả dịch vụ nha khoa tại Cẩm Tú, ngăn ngừa những nguy cơ tiềm ẩn. Giúp thời gian điều trị nhanh hơn và độ chính xác cao hơn, đặc biệt khi trồng Implant cho các bác sĩ. Hỗ trợ tầm soát các rủi ro trong tương lai và xử lí, phòng ngừa từ sớm, kéo dài tuổi thọ của các trụ Implant.",
+  "Medical Practice Certificate": "Chứng Chỉ Hành Nghề Y",
+  "Title_Price": "Bảng Giá Chăm Sóc Răng Miệng Tổng Quát",
+  "Title_Content_Price": "Tại Hoàng Bình, chúng tôi tin rằng sự trong suốt và thành thật với khách hàng là thiết yếu. Bảng giá của chúng tôi – ngoài việc cung cấp dịch vụ và điều trị – còn bao gồm sự chăm sóc đặc biệt, sử dụng các thiết bị và công nghệ chuyên khoa tiến tiến và sự tham gia của các chuyên gia nha khoa / bác sĩ dày dặn kinh nghiệm trong và sau quá trình điều trị.",
+  "table_price": "Bảng Giá",
+  "type_of_service": "Loại Dịch Vụ",
+  "price_of_service": "Giá Niêm Yết (VND)",
+  "dental_exam": "Khám Răng, Tư Vấn Dịch Vụ Nha Khoa",
+  "free": "Miễn Phí",
+  "des_dental_exam1": "Một bác sĩ hoặc chuyên gia của Hoàng Bình sẽ khám và xem xét tình trạng răng hiện tại của bạn. Tầm soát các nguy cơ răng miệng và đánh giá các yếu tố, bệnh lý bạn đang mắc phải để đưa ra lộ trình giải pháp tốt nhất cho bạn.",
+  "dental_exam_deep": "Khám Và Tư Vấn Chuyên Sâu",
+  "dental_exam_deep_price": "500.000đ",
+  "ct_3d": "Chụp Phim 3D Cone Beam CT",
+  "ct_3d_price": "500.000đ",
+  "periapical": "Chụp Phim Quanh Chóp",
+  "periapical_price": "100.000đ",
+  "pano_ceph": "Chụp Phim Pano & Cephalo",
+  "pano_ceph_price": "300.000đ",
+  "des_imaging": "Dịch vụ chụp phim (CT, pano, quanh chóp) giúp bác sĩ đánh giá xương, cấu trúc chân răng và lên kế hoạch điều trị. Giá ghi theo phim/chụp như chú thích.",
+  "title_teeth_cleaning": "Lấy Cao Răng & Đánh Bóng",
+  "teeth_cleaning": "Lấy Cao Răng & Đánh Bóng",
+  "teeth_cleaning_price": "250,000 đ",
+  "teeth_cleaning_premium": "Lấy Cao Răng & Đánh Bóng Premium",
+  "teeth_cleaning_premium_price": "600,000 đ",
+  "teeth_cleaning_under": "Lấy Cao Răng & Đánh Bóng Dưới Nướu",
+  "teeth_cleaning_under_price": "1,000,000 đ",
+  "des_teeth_cleaning1": "Cạo vôi và đánh bóng răng 4-6 tháng/lần giúp loại bỏ cao răng. Cao răng hình thành ở chân răng khi mảng bám tích tụ lâu ngày trong miệng. Nó có thể là rác giữa các kẽ răng hoặc dọc theo đường viền nướu mà chỉ nha khoa và bàn chải đánh răng không thể với tới."
+    ,"title_filling": "Trám Răng"
+    ,"filling_simple": "Trám Xoang I, III, Sealant, Cổ Răng"
+    ,"filling_simple_price": "400.000đ / Răng"
+    ,"filling_complex": "Trám Xoang IV, II - Phức Tạp"
+    ,"filling_complex_price": "800.000 - 1.000.000đ / Răng"
+    ,"des_filling": "Trám răng được sử dụng để khôi phục cấu trúc và chức năng răng sau sâu, chấn thương hoặc mòn. Vật liệu và độ phức tạp ảnh hưởng đến chi phí."
+  ,"title_endodontic": "Điều Trị Tủy"
+  ,"endodontic_1": "Điều Trị Tủy 1 (R1 - R5)"
+  ,"endodontic_1_price": "2.500.000đ / Răng"
+  ,"endodontic_2": "Điều Trị Tủy 2 (R6, R7)"
+  ,"endodontic_2_price": "3.500.000đ / Răng"
+  ,"endodontic_complex": "Điều Trị Tủy Phức Tạp"
+  ,"endodontic_complex_price": "4.500.000đ / Răng"
+  ,"des_endodontic": "Điều trị tủy loại bỏ mô tủy bị nhiễm hoặc hoại tử để ngăn ngừa lan rộng. Bác sĩ làm sạch ống tủy và lấp đầy bằng gutta-percha để bịt kín. Chi phí phụ thuộc vị trí răng và mức độ phức tạp."
+  ,"title_extraction": "Nhổ Răng"
+  ,"extraction_multi_root": "Nhổ Răng Nhiều Chân"
+  ,"extraction_multi_root_price": "2.000.000đ / Răng"
+  ,"extraction_loose": "Nhổ Răng Lung Lay / Răng Sữa"
+  ,"extraction_loose_price": "500.000đ / Răng"
+  ,"des_extraction": "Nhổ răng đôi khi cần thiết cho răng hư hỏng hoặc gây vấn đề. Với kỹ thuật hiện đại và bác sĩ giàu kinh nghiệm, thủ thuật an toàn và hồi phục nhanh. Giá thay đổi theo mức độ phức tạp."
+  ,"bottom_title" : "Bảng giá của chúng tôi đã được cập nhật vào ngày 26/10/2022. Tất cả giá nêu trên chỉ mang tính chất dự trù, chi phí cụ thể sẽ được bác sĩ của chúng tôi thông báo khi bạn đến khám tư vấn trực tiếp."
+  ,"title_veneer_porcelain": "Bảng Giá Răng Sứ & Dán Sứ Veneer"
+  ,"veneer_intro": "Chúng tôi tin vào minh bạch giá cả và vật liệu chất lượng cao. Dưới đây là bảng liệt kê các nhóm răng sứ và tùy chọn veneer của chúng tôi."
+  ,"veneer_group1": "Răng Sứ — Nhóm 1"
+  ,"warranty": "Bảo Hành"
+  ,"strength": "Độ Cứng"
+  ,"veneer_bio_dt_1": "Sứ Bio DT I"
+  ,"veneer_bio_dt_1_price": "7.000.000đ / Răng"
+  ,"veneer_bio_dt_1_warranty": "5 Năm"
+  ,"veneer_bio_dt_1_strength": "800 - 1000Mpa"
+  ,"veneer_fuzir_ii": "Sứ Fuzir II"
+  ,"veneer_fuzir_ii_price": "10.000.000đ / Răng"
+  ,"veneer_fuzir_ii_warranty": "10 Năm"
+  ,"veneer_fuzir_ii_strength": "1000Mpa"
+  ,"veneer_fuzir_i": "Sứ Fuzir I"
+  ,"veneer_fuzir_i_price": "12.000.000đ / Răng"
+  ,"veneer_fuzir_i_warranty": "10 Năm"
+  ,"veneer_fuzir_i_strength": "1000 - 1200Mpa"
+  ,"veneers_title_standard": "Dán Sứ Veneer — Standard"
+  ,"veneer_standard_v1": "Veneer Sứ"
+  ,"veneer_standard_v1_price": "6.000.000đ / Răng"
+  ,"veneer_standard_v1_warranty": "4 Năm"
+  ,"veneer_standard_v1_strength": "600Mpa"
+  ,"veneer_standard_v2": "Veneer Đa Lớp"
+  ,"veneer_standard_v2_price": "10.000.000đ / Răng"
+  ,"veneer_standard_v2_warranty": "7 Năm"
+  ,"veneer_standard_v2_strength": "600Mpa"
+
+  ,"veneers_title_premium": "Premium"
+  ,"veneer_mizuguchi": "Mizuguchi"
+  ,"veneer_mizuguchi_price": "15.000.000đ / Răng"
+  ,"veneer_mizuguchi_warranty": "15 Năm"
+  ,"veneer_mizuguchi_strength": "1000 - 1200Mpa"
+  ,"veneer_mizuguchi_plus": "Mizuguchi Plus"
+  ,"veneer_mizuguchi_plus_price": "30.000.000đ / Răng"
+  ,"veneer_mizuguchi_plus_warranty": "20 Năm"
+  ,"veneer_mizuguchi_plus_strength": "1000 - 1400Mpa"
+  ,"minor_surgery_title": "Bảng Giá Tiểu Phẫu & Phẫu Thuật Miệng"
+  ,"minor_surgery_intro": "Các dịch vụ tiểu phẫu nha khoa được thực hiện bởi đội ngũ bác sĩ giàu kinh nghiệm. Giá có thể thay đổi tùy theo mức độ phức tạp và sẽ được xác định sau khi khám tư vấn."
+  ,"minor_surgery_item_extraction_multi_root": "Nhổ Răng Nhiều Chân (Răng Sau)"
+  ,"minor_surgery_item_extraction_multi_root_price": "4.000.000đ / Răng"
+  ,"minor_surgery_item_wisdom_simple": "Nhổ Răng Khôn (Đơn Giản)"
+  ,"minor_surgery_item_wisdom_simple_price": "3.000.000đ / Răng"
+  ,"minor_surgery_item_wisdom_impacted": "Nhổ Răng Khôn Lệch / Kẹt (Phẫu Thuật)"
+  ,"minor_surgery_item_wisdom_impacted_price": "5.000.000đ / Răng"
+  ,"minor_surgery_item_apicectomy": "Cắt Chóp (Apicoectomy)"
+  ,"minor_surgery_item_apicectomy_price": "3.000.000 - 6.000.000đ"
+  ,"minor_surgery_item_frenectomy": "Cắt Dây Dính (Frenectomy)"
+  ,"minor_surgery_item_frenectomy_price": "500.000 - 1.000.000đ"
+  ,"minor_surgery_item_alveoloplasty": "Làm Trơn Ổ Răng (Alveoloplasty)"
+  ,"minor_surgery_item_alveoloplasty_price": "1.500.000 - 4.000.000đ"
+  ,"minor_surgery_item_cyst_enucleation": "Nạo U Nang (Cyst Enucleation)"
+  ,"minor_surgery_item_cyst_enucleation_price": "Liên hệ để báo giá"
+  ,"minor_surgery_note": "Tất cả giá phẫu thuật chỉ mang tính ước tính. Giá cuối cùng phụ thuộc vào đánh giá lâm sàng, mức độ phức tạp và thủ thuật bổ sung (ví dụ: gây mê, chụp CBCT)."
+  
+  ,"orthodontic_title": "Bảng Giá Niềng Răng — Mắc Cài & Invisalign"
+  ,"orthodontic_intro": "Chúng tôi cung cấp nhiều phương pháp chỉnh nha bao gồm mắc cài kim loại, hệ tự buộc và khay trong suốt Invisalign. Giá thay đổi theo mức độ phức tạp và kế hoạch điều trị."
+  ,"orthodontic_col_warranty": "Bảo Hành"
+  ,"orthodontic_item_bracket_standard": "Mắc Cài Chuẩn (Độ 1 - 3)"
+  ,"orthodontic_item_bracket_standard_price": "45.000.000đ / Cái"
+  ,"orthodontic_item_bracket_selfligating": "Mắc Cài Tự Buộc (Độ 1 - 3)"
+  ,"orthodontic_item_bracket_selfligating_price": "50.000.000đ / Cái"
+  ,"orthodontic_item_bracket_ceramic": "Mắc Cài Sứ (Độ 1 - 3)"
+  ,"orthodontic_item_bracket_ceramic_price": "55.000.000đ / Cái"
+  ,"orthodontic_item_bracket_ceramic_selfligating": "Mắc Cài Sứ Tự Buộc (Độ 1 - 3)"
+  ,"orthodontic_item_bracket_ceramic_selfligating_price": "65.000.000đ / Cái"
+  ,"orthodontic_item_auxiliary_appliance": "Khí Cụ Hỗ Trợ (Tiền Chỉnh Nha)"
+  ,"orthodontic_item_auxiliary_appliance_price": "20.000.000đ / Bộ"
+  ,"orthodontic_item_minivis": "Minivis (Mini vít neo)"
+  ,"orthodontic_item_minivis_price": "4.000.000đ / Cái"
+  ,"orthodontic_item_retainer": "Hàm Duy Trì (Hàm tháo)"
+  ,"orthodontic_item_retainer_price": "2.000.000đ"
+  ,"orthodontic_item_invisalign_1": "Invisalign® — Độ 1"
+  ,"orthodontic_item_invisalign_1_price": "90.000.000đ / Khung"
+  ,"orthodontic_item_invisalign_2": "Invisalign® — Độ 2"
+  ,"orthodontic_item_invisalign_2_price": "120.000.000đ / Khung"
+  ,"orthodontic_item_invisalign_combo": "Invisalign® + Phối Hợp Khí Cụ"
+  ,"orthodontic_item_invisalign_combo_price": "160.000.000đ / Khung"
+  ,"orthodontic_note": "Giá điều trị phụ thuộc vào chẩn đoán và có thể bao gồm các lần tái khám, khí cụ hoặc chụp phim bổ sung. Giá cuối cùng được xác nhận sau khi khám tư vấn."
+  ,"children_dental_title": "Bảng Giá Răng Trẻ Em"
+  ,"children_dental_intro": "Dịch vụ nha khoa nhi đầy đủ bao gồm chăm sóc phòng ngừa, fluoride, sealant, trám và nhổ răng thực hiện nhẹ nhàng cho bệnh nhi."
+  ,"children_item_exam": "Khám Răng & Tư Vấn"
+  ,"children_item_exam_price": "Miễn Phí"
+  ,"children_item_extraction_no_anesthesia": "Nhổ Răng Sữa (Không Thuốc Tê)"
+  ,"children_item_extraction_no_anesthesia_price": "100,000đ"
+  ,"children_item_fluoride_1_5": "Trám Gel Flour (1 - 5 Răng)"
+  ,"children_item_fluoride_1_5_price": "200,000đ"
+  ,"children_item_fluoride_5_10": "Trám Gel Flour (5 - 10 Răng)"
+  ,"children_item_fluoride_5_10_price": "400,000đ"
+  ,"children_item_fluoride_full": "Trám Gel Flour (2 Hàm)"
+  ,"children_item_fluoride_full_price": "600,000đ"
+  ,"children_item_pedo_filling_simple": "Trám Răng Sữa Xoang I, III, IV, Sealant"
+  ,"children_item_pedo_filling_simple_price": "200,000đ / Răng"
+  ,"children_item_pedo_filling_ii": "Trám Răng Sữa Xoang II"
+  ,"children_item_pedo_filling_ii_price": "300,000đ / Răng"
+  ,"children_item_extraction_with_anesthesia": "Nhổ Răng Sữa (Có Thuốc Tê)"
+  ,"children_item_extraction_with_anesthesia_price": "150,000đ / Răng"
+  ,"children_item_pedo_endodontic_1": "Điều Trị Tủy Răng Sữa 1 (Răng 1 - Răng 3)"
+  ,"children_item_pedo_endodontic_1_price": "500,000đ / Răng"
+  ,"children_item_pedo_endodontic_2": "Điều Trị Tủy Răng Sữa 2 (Răng 4, Răng 5)"
+  ,"children_item_pedo_endodontic_2_price": "1.000.000đ / Răng"
+  ,"children_dental_note": "Giá cho dịch vụ nhi chỉ mang tính ước tính; giá cuối cùng phụ thuộc vào tình trạng và yêu cầu điều trị của trẻ."
+  ,
+  "implant_title": "Bảng Giá Phẫu Thuật Đặt Implant",
+  "implant_abutment_title": "Abutment",
+  "implant_abutment_row_consultation": "Khám & Tư Vấn Implant",
+  "implant_abutment_row_consultation_price": "Miễn Phí",
+  "implant_abutment_description": "Bác sĩ hoặc chuyên gia sẽ khám và đánh giá tình trạng răng miệng hiện tại của bạn và thảo luận các lựa chọn implant cùng phương án điều trị phù hợp.",
+
+  "implant_single_title": "Single Implant",
+  "implant_single_col_manufacture": "Xuất Xứ",
+  "implant_single_col_brands": "Thương Hiệu",
+  "implant_single_col_price": "Giá Niêm Yết",
+  "implant_single_col_warranty": "Bảo Hành",
+  "implant_single_row1_manufacture": "Hàn Quốc",
+  "implant_single_row1_brands": "Dentis, Chaorum",
+  "implant_single_row1_price": "13.000.000đ",
+  "implant_single_row1_warranty": "5 Năm",
+  "implant_single_row2_manufacture": "Hàn Quốc",
+  "implant_single_row2_brands": "DIO, Dentium",
+  "implant_single_row2_price": "15.000.000đ",
+  "implant_single_row2_warranty": "5 Năm",
+  "implant_single_row3_manufacture": "USA, Germany, France, Japan, Switzerland",
+  "implant_single_row3_brands": "Pantop, Ritter, Tekka, Ankylos, SIC",
+  "implant_single_row3_price": "20.000.000đ",
+  "implant_single_row3_warranty": "10 Năm",
+  "implant_single_row4_manufacture": "Thụy Sĩ",
+  "implant_single_row4_brands": "Nobel, Straumann",
+  "implant_single_row4_price": "28.000.000đ",
+  "implant_single_row4_warranty": "20 Năm",
+
+  "implant_all_on_8_title": "ALL-ON-8",
+  "implant_all_on_6_title": "ALL-ON-6",
+  "implant_all_on_4_title": "ALL-ON-4",
+  "implant_col_brands": "Thương Hiệu Implant",
+  "implant_col_warranty": "Bảo Hành",
+  "implant_col_listed_price": "Giá Niêm Yết",
+  "implant_col_july_2025": "Tháng 7/2025",
+
+  "implant_allon_row1_brands": "Hàn Quốc (DIO, Dentium)",
+  "implant_allon_row1_warranty": "5 Năm",
+  "implant_allon_row1_price": "200.000.000đ",
+  "implant_allon_row1_special": "170.000.000đ",
+
+  "implant_allon_row2_brands": "USA, Germany, France, Japan (Adin, Hiossen)",
+  "implant_allon_row2_warranty": "10 Năm",
+  "implant_allon_row2_price": "250.000.000đ",
+  "implant_allon_row2_special": "220.000.000đ",
+
+  "implant_allon_row3_brands": "Thụy Sĩ (Nobel, Straumann)",
+  "implant_allon_row3_warranty": "20 Năm",
+  "implant_allon_row3_price": "300.000.000đ",
+  "implant_allon_row3_special": "290.000.000đ",
+
+  "implant_allon6_row1_brands": "Hàn Quốc (DIO, Dentium)",
+  "implant_allon6_row1_warranty": "5 Năm",
+  "implant_allon6_row1_price": "180.000.000đ",
+  "implant_allon6_row1_special": "160.000.000đ",
+
+  "implant_allon6_row2_brands": "USA, Germany, France, Japan (Adin, Hiossen)",
+  "implant_allon6_row2_warranty": "10 Năm",
+  "implant_allon6_row2_price": "220.000.000đ",
+  "implant_allon6_row2_special": "180.000.000đ",
+
+  "implant_allon6_row3_brands": "Thụy Sĩ (Nobel, Straumann)",
+  "implant_allon6_row3_warranty": "20 Năm",
+  "implant_allon6_row3_price": "250.000.000đ",
+  "implant_allon6_row3_special": "220.000.000đ",
+
+  "implant_allon4_row1_brands": "Hàn Quốc (DIO, Dentium)",
+  "implant_allon4_row1_warranty": "5 Năm",
+  "implant_allon4_row1_price": "150.000.000đ",
+  "implant_allon4_row1_special": "130.000.000đ",
+
+  "implant_allon4_row2_brands": "USA, Germany, France, Japan (Adin, Hiossen)",
+  "implant_allon4_row2_warranty": "10 Năm",
+  "implant_allon4_row2_price": "180.000.000đ",
+  "implant_allon4_row2_special": "160.000.000đ",
+
+  "implant_allon4_row3_brands": "Thụy Sĩ (Nobel, Straumann)",
+  "implant_allon4_row3_warranty": "20 Năm",
+  "implant_allon4_row3_price": "220.000.000đ",
+  "implant_allon4_row3_special": "200.000.000đ",
+
+  "implant_additional_title": "Điều Trị Phát Sinh (Bác sĩ chỉ định - Nếu có)",
+  "implant_additional_col_service": "Loại Dịch Vụ",
+  "implant_additional_col_price": "Giá Niêm Yết",
+  "implant_additional_row1_service": "Ghép Màng",
+  "implant_additional_row1_price": "4.000.000đ",
+  "implant_additional_row2_service": "Ghép Xương Hạt",
+  "implant_additional_row2_price": "4.000.000 - 10.000.000đ",
+  "implant_additional_row3_service": "Ghép Xương Collagene",
+  "implant_additional_row3_price": "7.000.000đ / khối",
+  "implant_additional_row4_service": "Ghép collagene",
+  "implant_additional_row4_price": "1.000.000đ / khối"
+  ,
+  "prosthetics_title": "Bảng Giá Phục Hình Cố Định & Tháo Lắp",
+  "prosthetics_intro": "Tại Cẩm Tú, chúng tôi minh bạch về giá phục hình cố định và tháo lắp, bao gồm inlay, onlay và hàm tháo lắp bán phần/toàn hàm.",
+
+  "prosthetics_fixed_title": "Phục Hình Cố Định",
+  "prosthetics_fixed_row1_service": "Inlay, Onlay Composite",
+  "prosthetics_fixed_row1_price": "1.000.000đ / Răng",
+  "prosthetics_fixed_row1_warranty": "1 Năm",
+  "prosthetics_fixed_row2_service": "Inlay, Onlay Sứ",
+  "prosthetics_fixed_row2_price": "6.000.000đ / Răng",
+  "prosthetics_fixed_row2_warranty": "2 Năm",
+
+  "prosthetics_removable_title": "Phục Hình Tháo Lắp",
+  "prosthetics_framework_title": "Hàm Khung",
+  "prosthetics_framework_row1_service": "Khung Titan",
+  "prosthetics_framework_row1_price": "5.000.000đ / Khung",
+  "prosthetics_framework_row1_warranty": "-",
+  "prosthetics_framework_row2_service": "Răng Tháo Lắp Trên Khung",
+  "prosthetics_framework_row2_price": "500.000đ / Răng",
+  "prosthetics_framework_row2_warranty": "1 Năm",
+
+  "prosthetics_partial_title": "Bán Hàm Nhựa",
+  "prosthetics_partial_row1_service": "Tháo Lắp Nhựa - Răng Excellent",
+  "prosthetics_partial_row1_price": "1.000.000đ / Răng",
+  "prosthetics_partial_row1_warranty": "2 Năm",
+  "prosthetics_partial_row2_service": "Biosoft (Mềm)",
+  "prosthetics_partial_row2_price": "5.000.000đ / Hàm",
+  "prosthetics_partial_row2_warranty": "1 Năm",
+  "prosthetics_partial_row3_service": "Biosoft (Cường Lực)",
+  "prosthetics_partial_row3_price": "20.000.000đ / Hàm",
+  "prosthetics_partial_row3_warranty": "5 Năm",
+
+  "prosthetics_full_title": "Toàn Hàm",
+  "prosthetics_full_row1_service": "Hàm Excellent Chuẩn",
+  "prosthetics_full_row1_price": "10.000.000đ / Hàm",
+  "prosthetics_full_row1_warranty": "2 Năm",
+  "prosthetics_full_row2_service": "Hàm Vàng",
+  "prosthetics_full_row2_price": "15.000.000đ / Hàm",
+  "prosthetics_full_row2_warranty": "3 Năm",
+  "prosthetics_full_row3_service": "Hàm Super",
+  "prosthetics_full_row3_price": "30.000.000đ / Hàm",
+  "prosthetics_full_row3_warranty": "5 Năm"
+}

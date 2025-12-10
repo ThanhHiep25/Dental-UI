@@ -1,0 +1,351 @@
+{
+  "name_dental": "Hoang Binh Dental Clinic",
+  "login": "Login",
+  "register": "Register",
+  "password": "Password",
+  "fpassword": "Forgot Password ?",
+  "name": "Name",
+  "phone": "Phone Number",
+  "st": " Don't have an account? Sign up now",
+  "Home": "Home",
+  "About": "About",
+  "Services": "Services",
+  "cosmetic_porcelain_teeth": "Cosmetic porcelain crowns",
+  "porcelain_veneer": "Porcelain Veneer",
+  "invisalign_orthodontics": "Invisalign Orthodontics",
+  "individual_implants": "Individual Implants",
+  "full_mouth_dental_implants": "Full Arch Implant",
+  "in_office_zoom_teeth_whitening": "In-office Zoom Whitening",
+  "periodontic_gum_diseases": "Periodontic Gum Diseases",
+  "Pricing": "Pricing",
+  "dental_exam_pricing": "Dental Exam Pricing",
+  "veneer_porcelain_pricing": "Veneer/Porcelain Pricing",
+  "minor_surgery_pricing": "Minor Surgery Pricing",
+  "orthodontic_pricing": "Orthodontic Pricing",
+  "children_dental_pricing": "Children's Dental Pricing",
+  "implant_surgery_pricing": "Implant Surgery Pricing",
+  "fixed_removable_prosthetics_pricing": "Fixed/Removable Prosthetics Pricing",
+  "Contact": "Contact",
+  "Special Offers": "Special Offers",
+  "New Products": "New Products",
+  "page_title": "A journey to restore over 100,000 smiles and improve quality of life since 2004",
+  "book_appointment": "Book an Appointment",
+  "smile_gallery": "Smile Gallery",
+  "about_us_title": "Over 70% of clients come to Hoang Binh through personal referrals",
+  "about_us_paragraph_1": "Implant placement or cosmetic porcelain teeth are not just immediate dental treatments. They are a big change.",
+  "about_us_paragraph_2": "Clients leave Hoang Binh with the confidence and quality of life they deserve.",
+  "about_us_paragraph_3": "Each client brings a story, and our mission is to help you write a new, brighter chapter filled with more smiles and happiness.",
+  "book_consultation_now": "Book a Consultation Now",
+  "experience_services": "Experience Our Dental Services",
+  "smile_design": "Smile Design",
+  "golden_ratio_cosmetic_porcelain_teeth": "Golden Ratio Cosmetic Porcelain Teeth",
+  "smile_design1": "Natural as real teeth",
+  "smile_des1": "Your porcelain teeth will be personalized by Hoang Binh artists to match your real teeth naturally. You can choose the whiteness of your teeth as desired.",
+  "smile_design2": "Eat and drink without fear of construction damage",
+  "smile_des2": "Zirconium porcelain imported from Germany with special slow-firing technology, achieving maximum hardness (1200-1400mpa). Eat and drink comfortably immediately after teeth are attached.",
+  "smile_design3": "Completed in 2 days",
+  "smile_des3": "Cases of 1-4 teeth can be completed in 2 days and full jaw in 4 days. In-house Lab shortens treatment time to the maximum.",
+  "about_panters_implants": "About Panters Implants",
+  "General Examination Service": "General Examination Service",
+  "Exquisite beauty and practical application": "Exquisite beauty and practical application",
+  "t_banner_about": "Hoang Binh always aims to make each treatment a memorable experience for each customer - in the most comfortable, painless way and with unexpected results. Not just simply white teeth, I aim for the delicate beauty of a smile, harmoniously honoring the facial features of each customer.",
+  "t_banner_about_1": "Do it once, use it for life.",
+  "t_banner_about_2": "Minimize waste - time, travel, environment and cost",
+  "t_banner_about_3": "More than just a treatment - it's a dental experience",
+  "t_banner_about_4": "Always try to ensure minimal complications and post-treatment corrections",
+  "Core values": "Core values",
+  "Core title_1": "Exquisite Beauty & Practical Application",
+  "Core content_1": "We provide dental services with the aim of delivering practical results. Hoang Binh is not only concerned with the authenticity of teeth but also the harmony with the face and chewing function for customers.",
+  "Core title_2": "Technology Is Important",
+  "Core content_2": "Prioritizing application, quality, time and optimization by continuously investing in the most advanced technology, methods and specialized equipment, as well as Cam Tu's team of dentists and doctors.",
+  "Core title_3": "Quality Over Quantity",
+  "Core content_3": "We do not chase quantity but always try to create memorable experiences for each customer. So that you can confidently introduce your loved ones to put their trust in Hoang Binh.",
+  "Core title_4":"Sustainable Development",
+  "Core content_4": "Hoang Binh has a long-term vision, always aware of the responsibility and obligation of the business to the environment and customers in the long term. Actively protect the environment, minimize medical waste and ensure the quality of each service.",
+  "Scan 3D CT": "3D CT Cone Beam Scanning Technology",
+  "Scan3D_content_1": "This advanced imaging technology provides three-dimensional images of your teeth, bones, nerves, and even your sinus cavities. It helps your dentist get a detailed overview of your dental condition, significantly simplifying the screening and evaluation process.",
+  "Scan3D_content_2": "Cone Beam CT scans are used in almost all dental services at Cam Tu, preventing potential risks. Helping treatment time faster and with higher accuracy, especially when placing implants for doctors. Supporting screening for future risks and early treatment and prevention, prolonging the life of implant pillars.",
+  "Medical Practice Certificate": "Medical Practice Certificate",
+   "Title_Price": "General Oral Care Price List",
+  "Title_Content_Price": "At Hoang Binh, we believe that transparency and honesty with customers are essential. Our price list – in addition to providing services and treatments – also includes special care, using advanced specialized equipment and technology, and the participation of experienced dental experts/doctors during and after the treatment process.",
+  "table_price": "Price List",
+  "type_of_service": "Type of Service",
+  "price_of_service": "Listed Price (VND)",
+  "dental_exam": "Dental Examination and Consultation",
+  "free": "Free",
+  "des_dental_exam1": "A doctor or specialist at Hoang Binh will examine and review your current dental condition. Screening for oral risks and evaluating the factors and diseases you are suffering from to provide the best solution plan for you.",
+  "dental_exam_deep": "In-depth Dental Consultation",
+  "dental_exam_deep_price": "500.000đ",
+  "ct_3d": "3D Cone Beam CT Scan",
+  "ct_3d_price": "500.000đ",
+  "periapical": "Periapical / Around Apex Film",
+  "periapical_price": "100.000đ",
+  "pano_ceph": "Panoramic & Cephalometric Film",
+  "pano_ceph_price": "300.000đ",
+  "des_imaging": "Imaging services (CT, panoramic, periapical) help the dentist assess bone, root anatomy and plan treatment. Prices listed are per film/scan as noted.",
+  "title_teeth_cleaning": "Scaling & Polishing",
+  "teeth_cleaning": "Scaling & Polishing",
+  "teeth_cleaning_price": "250,000 VND",
+  "teeth_cleaning_premium": "Premium Scaling & Polishing",
+  "teeth_cleaning_premium_price": "600,000 VND",
+  "teeth_cleaning_under": "Subgingival Scaling & Polishing",
+  "teeth_cleaning_under_price": "1,000,000 VND",
+  "des_teeth_cleaning1": "Scaling and polishing your teeth every 4-6 months helps remove tartar. Tartar forms at the base of the teeth when plaque accumulates over time in the mouth. It can be debris between teeth or along the gum line that dental floss and toothbrushes cannot reach."
+  ,"title_filling": "Filling / Restorative Treatment"
+  ,"filling_simple": "Simple Filling (Class I, III, Sealant, Cervical)"
+  ,"filling_simple_price": "400.000đ / Tooth"
+  ,"filling_complex": "Complex Filling (Class II, IV)"
+  ,"filling_complex_price": "800.000 - 1.000.000đ / Tooth"
+  ,"des_filling": "Fillings restore tooth form and function after decay, trauma or wear."
+  ,"title_endodontic": "Endodontic (Root Canal) Treatment"
+  ,"endodontic_1": "Endodontic Treatment 1 (R1 - R5)"
+  ,"endodontic_1_price": "2.500.000đ / Tooth"
+  ,"endodontic_2": "Endodontic Treatment 2 (R6, R7)"
+  ,"endodontic_2_price": "3.500.000đ / Tooth"
+  ,"endodontic_complex": "Complex Endodontic Treatment"
+  ,"endodontic_complex_price": "4.500.000đ / Tooth"
+  ,"des_endodontic": "Root canal treatment removes the infected or dead pulp to prevent spread. The dentist cleans and fills the canal space with gutta-percha to seal it. Treatment cost depends on tooth position and complexity."
+  ,"title_extraction": "Tooth Extraction"
+  ,"extraction_multi_root": "Multi-root Extraction"
+  ,"extraction_multi_root_price": "2.000.000đ / Tooth"
+  ,"extraction_loose": "Loose/Primary Tooth Extraction"
+  ,"extraction_loose_price": "500.000đ / Tooth"
+  ,"des_extraction": "Extractions are sometimes necessary for damaged or problematic teeth. With modern techniques and experienced dentists the procedure is safe and recovery is quick. Prices vary by complexity."
+  ,"bottom_title" : "Our price list was updated on October 26, 2022. All prices listed above are estimates only, the specific cost will be informed by our doctor when you come for a direct consultation."
+  ,"title_veneer_porcelain": "Veneer & Porcelain Pricing"
+  ,"veneer_intro": "We believe in transparent pricing and high-quality materials. Below are our group listings for porcelain crowns and veneer options."
+  ,"veneer_group1": "Porcelain Crowns — Group 1"
+  ,"warranty": "Warranty"
+  ,"strength": "Strength"
+  ,"veneer_bio_dt_1": "Bio DT Porcelain I"
+  ,"veneer_bio_dt_1_price": "7.000.000đ / Tooth"
+  ,"veneer_bio_dt_1_warranty": "5 Years"
+  ,"veneer_bio_dt_1_strength": "800 - 1000Mpa"
+  ,"veneer_fuzir_ii": "Fuzir Porcelain II"
+  ,"veneer_fuzir_ii_price": "10.000.000đ / Tooth"
+  ,"veneer_fuzir_ii_warranty": "10 Years"
+  ,"veneer_fuzir_ii_strength": "1000Mpa"
+  ,"veneer_fuzir_i": "Fuzir Porcelain I"
+  ,"veneer_fuzir_i_price": "12.000.000đ / Tooth"
+  ,"veneer_fuzir_i_warranty": "10 Years"
+  ,"veneer_fuzir_i_strength": "1000 - 1200Mpa"
+  ,"veneers_title_standard": "Veneer — Standard"
+  ,"veneer_standard_v1": "Veneer Porcelain"
+  ,"veneer_standard_v1_price": "6.000.000đ / Tooth"
+  ,"veneer_standard_v1_warranty": "4 Years"
+  ,"veneer_standard_v1_strength": "600Mpa"
+  ,"veneer_standard_v2": "Multi-layer Veneer"
+  ,"veneer_standard_v2_price": "10.000.000đ / Tooth"
+  ,"veneer_standard_v2_warranty": "7 Years"
+  ,"veneer_standard_v2_strength": "600Mpa"
+
+  ,"veneers_title_premium": "Premium"
+  ,"veneer_mizuguchi": "Mizuguchi"
+  ,"veneer_mizuguchi_price": "15.000.000đ / Tooth"
+  ,"veneer_mizuguchi_warranty": "15 Years"
+  ,"veneer_mizuguchi_strength": "1000 - 1200Mpa"
+  ,"veneer_mizuguchi_plus": "Mizuguchi Plus"
+  ,"veneer_mizuguchi_plus_price": "30.000.000đ / Tooth"
+  ,"veneer_mizuguchi_plus_warranty": "20 Years"
+  ,"veneer_mizuguchi_plus_strength": "1000 - 1400Mpa"
+  ,"minor_surgery_title": "Minor Surgery & Oral Surgery Pricing"
+  ,"minor_surgery_intro": "Our minor oral surgery services are performed by experienced surgeons. Prices vary by complexity and will be confirmed after consultation."
+  ,"minor_surgery_item_extraction_multi_root": "Multi-root Extraction (Posterior)"
+  ,"minor_surgery_item_extraction_multi_root_price": "4.000.000đ / Tooth"
+  ,"minor_surgery_item_wisdom_simple": "Simple Wisdom Tooth Extraction"
+  ,"minor_surgery_item_wisdom_simple_price": "3.000.000đ / Tooth"
+  ,"minor_surgery_item_wisdom_impacted": "Impacted Wisdom Tooth (Surgical)"
+  ,"minor_surgery_item_wisdom_impacted_price": "5.000.000đ / Tooth"
+  ,"minor_surgery_item_apicectomy": "Apicoectomy (Root-end Surgery)"
+  ,"minor_surgery_item_apicectomy_price": "3.000.000 - 6.000.000đ"
+  ,"minor_surgery_item_frenectomy": "Frenectomy (Frenulum Release)"
+  ,"minor_surgery_item_frenectomy_price": "500.000 - 1.000.000đ"
+  ,"minor_surgery_item_alveoloplasty": "Alveoloplasty (Bone Smoothing)"
+  ,"minor_surgery_item_alveoloplasty_price": "1.500.000 - 4.000.000đ"
+  ,"minor_surgery_item_cyst_enucleation": "Cyst Enucleation"
+  ,"minor_surgery_item_cyst_enucleation_price": "Contact for quote"
+  ,"minor_surgery_note": "All surgical prices are estimates. Final price depends on clinical assessment, complexity and additional procedures (e.g., sedation, CBCT)."
+
+  ,"orthodontic_title": "Orthodontic Pricing — Braces & Invisalign"
+  ,"orthodontic_intro": "We offer a range of orthodontic treatments including traditional braces, self-ligating systems and Invisalign aligners. Prices vary by case complexity and treatment plan."
+  ,"orthodontic_col_warranty": "Warranty"
+  ,"orthodontic_item_bracket_standard": "Standard Metal Braces (Level 1 - 3)"
+  ,"orthodontic_item_bracket_standard_price": "45.000.000đ / Case"
+  ,"orthodontic_item_bracket_selfligating": "Self-ligating Brackets (Level 1 - 3)"
+  ,"orthodontic_item_bracket_selfligating_price": "50.000.000đ / Case"
+  ,"orthodontic_item_bracket_ceramic": "Ceramic Brackets (Level 1 - 3)"
+  ,"orthodontic_item_bracket_ceramic_price": "55.000.000đ / Case"
+  ,"orthodontic_item_bracket_ceramic_selfligating": "Ceramic Self-ligating (Level 1 - 3)"
+  ,"orthodontic_item_bracket_ceramic_selfligating_price": "65.000.000đ / Case"
+  ,"orthodontic_item_auxiliary_appliance": "Auxiliary Appliances (Pre-orthodontic)"
+  ,"orthodontic_item_auxiliary_appliance_price": "20.000.000đ / Set"
+  ,"orthodontic_item_minivis": "Miniscrews (Minivis)"
+  ,"orthodontic_item_minivis_price": "4.000.000đ / Piece"
+  ,"orthodontic_item_retainer": "Retention Appliance (Removable Retainer)"
+  ,"orthodontic_item_retainer_price": "2.000.000đ"
+  ,"orthodontic_item_invisalign_1": "Invisalign® — Level 1"
+  ,"orthodontic_item_invisalign_1_price": "90.000.000đ / Course"
+  ,"orthodontic_item_invisalign_2": "Invisalign® — Level 2"
+  ,"orthodontic_item_invisalign_2_price": "120.000.000đ / Course"
+  ,"orthodontic_item_invisalign_combo": "Invisalign® + Auxiliary Appliances"
+  ,"orthodontic_item_invisalign_combo_price": "160.000.000đ / Course"
+  ,"orthodontic_note": "Treatment price depends on diagnosis and may include additional visits, appliances or scans. Final cost confirmed after consultation."
+  ,"children_dental_title": "Children's Dental Pricing"
+  ,"children_dental_intro": "Comprehensive pediatric dental services including preventive care, fluoride, sealants, fillings and extractions performed gently for young patients."
+  ,"children_item_exam": "Dental Exam & Consultation"
+  ,"children_item_exam_price": "Free"
+  ,"children_item_extraction_no_anesthesia": "Primary Tooth Extraction (No Anesthesia)"
+  ,"children_item_extraction_no_anesthesia_price": "100,000đ"
+  ,"children_item_fluoride_1_5": "Topical Fluoride (1 - 5 teeth)"
+  ,"children_item_fluoride_1_5_price": "200,000đ"
+  ,"children_item_fluoride_5_10": "Topical Fluoride (5 - 10 teeth)"
+  ,"children_item_fluoride_5_10_price": "400,000đ"
+  ,"children_item_fluoride_full": "Topical Fluoride (Both Arches)"
+  ,"children_item_fluoride_full_price": "600,000đ"
+  ,"children_item_pedo_filling_simple": "Pediatric Filling (Class I, III, IV, Sealant)"
+  ,"children_item_pedo_filling_simple_price": "200,000đ / Tooth"
+  ,"children_item_pedo_filling_ii": "Pediatric Filling (Class II)"
+  ,"children_item_pedo_filling_ii_price": "300,000đ / Tooth"
+  ,"children_item_extraction_with_anesthesia": "Primary Tooth Extraction (With Local Anesthesia)"
+  ,"children_item_extraction_with_anesthesia_price": "150,000đ / Tooth"
+  ,"children_item_pedo_endodontic_1": "Pediatric Pulp Treatment 1 (Tooth 1 - 3)"
+  ,"children_item_pedo_endodontic_1_price": "500,000đ / Tooth"
+  ,"children_item_pedo_endodontic_2": "Pediatric Pulp Treatment 2 (Tooth 4, 5)"
+  ,"children_item_pedo_endodontic_2_price": "1.000.000đ / Tooth"
+  ,"children_dental_note": "Prices for pediatric care are estimates; final cost depends on the child's condition and treatment requirements."
+  ,
+  "implant_title": "Implant Surgery Pricing",
+  "implant_abutment_title": "Abutment",
+  "implant_abutment_row_consultation": "Examination & Implant Consultation",
+  "implant_abutment_row_consultation_price": "Free",
+  "implant_abutment_description": "A doctor or specialist will examine and evaluate your current dental health and discuss implant options and the most suitable treatment plan.",
+
+  "implant_single_title": "Single Implant",
+  "implant_single_col_manufacture": "Manufacture",
+  "implant_single_col_brands": "Brands",
+  "implant_single_col_price": "Listed Price",
+  "implant_single_col_warranty": "Warranty",
+  "implant_single_row1_manufacture": "Korea",
+  "implant_single_row1_brands": "Dentis, Chaorum",
+  "implant_single_row1_price": "13.000.000đ",
+  "implant_single_row1_warranty": "5 Years",
+  "implant_single_row2_manufacture": "Korea",
+  "implant_single_row2_brands": "DIO, Dentium",
+  "implant_single_row2_price": "15.000.000đ",
+  "implant_single_row2_warranty": "5 Years",
+  "implant_single_row3_manufacture": "USA, Germany, France, Japan, Switzerland",
+  "implant_single_row3_brands": "Pantop, Ritter, Tekka, Ankylos, SIC",
+  "implant_single_row3_price": "20.000.000đ",
+  "implant_single_row3_warranty": "10 Years",
+  "implant_single_row4_manufacture": "Switzerland",
+  "implant_single_row4_brands": "Nobel, Straumann",
+  "implant_single_row4_price": "28.000.000đ",
+  "implant_single_row4_warranty": "20 Years",
+
+  "implant_all_on_8_title": "All-on-8",
+  "implant_all_on_6_title": "All-on-6",
+  "implant_all_on_4_title": "All-on-4",
+  "implant_col_brands": "Implant Brands",
+  "implant_col_warranty": "Warranty",
+  "implant_col_listed_price": "Listed Price",
+  "implant_col_july_2025": "July 7/2025",
+
+  "implant_allon_row1_brands": "Korea (DIO, Dentium)",
+  "implant_allon_row1_warranty": "5 Years",
+  "implant_allon_row1_price": "200.000.000đ",
+  "implant_allon_row1_special": "170.000.000đ",
+
+  "implant_allon_row2_brands": "USA, Germany, France, Japan (Adin, Hiossen)",
+  "implant_allon_row2_warranty": "10 Years",
+  "implant_allon_row2_price": "250.000.000đ",
+  "implant_allon_row2_special": "220.000.000đ",
+
+  "implant_allon_row3_brands": "Switzerland (Nobel, Straumann)",
+  "implant_allon_row3_warranty": "20 Years",
+  "implant_allon_row3_price": "300.000.000đ",
+  "implant_allon_row3_special": "290.000.000đ",
+
+  "implant_allon6_row1_brands": "Korea (DIO, Dentium)",
+  "implant_allon6_row1_warranty": "5 Years",
+  "implant_allon6_row1_price": "180.000.000đ",
+  "implant_allon6_row1_special": "160.000.000đ",
+
+  "implant_allon6_row2_brands": "USA, Germany, France, Japan (Adin, Hiossen)",
+  "implant_allon6_row2_warranty": "10 Years",
+  "implant_allon6_row2_price": "220.000.000đ",
+  "implant_allon6_row2_special": "180.000.000đ",
+
+  "implant_allon6_row3_brands": "Switzerland (Nobel, Straumann)",
+  "implant_allon6_row3_warranty": "20 Years",
+  "implant_allon6_row3_price": "250.000.000đ",
+  "implant_allon6_row3_special": "220.000.000đ",
+
+  "implant_allon4_row1_brands": "Korea (DIO, Dentium)",
+  "implant_allon4_row1_warranty": "5 Years",
+  "implant_allon4_row1_price": "150.000.000đ",
+  "implant_allon4_row1_special": "130.000.000đ",
+
+  "implant_allon4_row2_brands": "USA, Germany, France, Japan (Adin, Hiossen)",
+  "implant_allon4_row2_warranty": "10 Years",
+  "implant_allon4_row2_price": "180.000.000đ",
+  "implant_allon4_row2_special": "160.000.000đ",
+
+  "implant_allon4_row3_brands": "Switzerland (Nobel, Straumann)",
+  "implant_allon4_row3_warranty": "20 Years",
+  "implant_allon4_row3_price": "220.000.000đ",
+  "implant_allon4_row3_special": "200.000.000đ",
+
+  "implant_additional_title": "Additional Procedures (Doctor Indicated - If Needed)",
+  "implant_additional_col_service": "Type of Service",
+  "implant_additional_col_price": "Listed Price",
+  "implant_additional_row1_service": "Membrane Graft",
+  "implant_additional_row1_price": "4.000.000đ",
+  "implant_additional_row2_service": "Bone Graft (Granular)",
+  "implant_additional_row2_price": "4.000.000 - 10.000.000đ",
+  "implant_additional_row3_service": "Collagen Bone Graft",
+  "implant_additional_row3_price": "7.000.000đ / block",
+  "implant_additional_row4_service": "Collagen Graft",
+  "implant_additional_row4_price": "1.000.000đ / block"
+  ,
+  "prosthetics_title": "Fixed & Removable Prosthetics Pricing",
+  "prosthetics_intro": "Transparent pricing for fixed and removable prosthetics, including inlays, onlays and partial or full dentures.",
+
+  "prosthetics_fixed_title": "Fixed Prosthetics",
+  "prosthetics_fixed_row1_service": "Inlay, Onlay Composite",
+  "prosthetics_fixed_row1_price": "1.000.000đ / Tooth",
+  "prosthetics_fixed_row1_warranty": "1 Year",
+  "prosthetics_fixed_row2_service": "Inlay, Onlay Porcelain",
+  "prosthetics_fixed_row2_price": "6.000.000đ / Tooth",
+  "prosthetics_fixed_row2_warranty": "2 Years",
+
+  "prosthetics_removable_title": "Removable Prosthetics",
+  "prosthetics_framework_title": "Framework Dentures",
+  "prosthetics_framework_row1_service": "Titan Frame",
+  "prosthetics_framework_row1_price": "5.000.000đ / Frame",
+  "prosthetics_framework_row1_warranty": "-",
+  "prosthetics_framework_row2_service": "Denture Teeth on Frame",
+  "prosthetics_framework_row2_price": "500.000đ / Tooth",
+  "prosthetics_framework_row2_warranty": "1 Year",
+
+  "prosthetics_partial_title": "Partial Acrylic Denture",
+  "prosthetics_partial_row1_service": "Acrylic Denture - Excellent Tooth",
+  "prosthetics_partial_row1_price": "1.000.000đ / Tooth",
+  "prosthetics_partial_row1_warranty": "2 Years",
+  "prosthetics_partial_row2_service": "Biosoft (Soft)",
+  "prosthetics_partial_row2_price": "5.000.000đ / Arch",
+  "prosthetics_partial_row2_warranty": "1 Year",
+  "prosthetics_partial_row3_service": "Biosoft (Reinforced)",
+  "prosthetics_partial_row3_price": "20.000.000đ / Arch",
+  "prosthetics_partial_row3_warranty": "5 Years",
+
+  "prosthetics_full_title": "Full Denture",
+  "prosthetics_full_row1_service": "Excellent Standard Denture",
+  "prosthetics_full_row1_price": "10.000.000đ / Arch",
+  "prosthetics_full_row1_warranty": "2 Years",
+  "prosthetics_full_row2_service": "Gold Denture",
+  "prosthetics_full_row2_price": "15.000.000đ / Arch",
+  "prosthetics_full_row2_warranty": "3 Years",
+  "prosthetics_full_row3_service": "Super Denture",
+  "prosthetics_full_row3_price": "30.000.000đ / Arch",
+  "prosthetics_full_row3_warranty": "5 Years"
+}
