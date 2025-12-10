@@ -28,12 +28,12 @@ const LanguageSwitcher = () => {
     return (
       <div className="flex gap-2">
         <button
-          className={`text-sm font-bold p-2 rounded-md bg-blue-500 text-white`}
+          className={`text-sm font-bold p-1 rounded-md bg-blue-500 text-white`}
         >
           VI
         </button>
         <button
-          className={`text-sm font-bold p-2 rounded-md bg-gray-200 text-gray-800`}
+          className={`text-sm font-bold p-1 rounded-md bg-gray-200 text-gray-800`}
         >
           EN
         </button>
@@ -46,16 +46,16 @@ const LanguageSwitcher = () => {
     <div className="flex items-center justify-center gap-2">
       <button
         onClick={() => changeLanguage('vi')}
-        className={`text-sm font-bold w-20 h-10 flex items-center justify-center gap-1 rounded-full ${i18n.language === 'vi' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+        className={`text-[14px] font-bold w-14 h-8 flex items-center justify-center gap-1 rounded-full ${i18n.language === 'vi' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
       >
-        <Image src="/LOGO/viet-nam.png" alt="vi" width={20} height={20} />
+        <Image src="/LOGO/viet-nam.png" alt="vi" width={16} height={16} />
         VI
       </button>
       <button
         onClick={() => changeLanguage('en')}
-        className={`text-sm font-bold w-20 h-10 flex items-center justify-center gap-1 rounded-full ${i18n.language === 'en' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+        className={`text-[14px] font-bold w-14 h-8 flex items-center justify-center gap-1 rounded-full ${i18n.language === 'en' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
       >
-         <Image src="/LOGO/united-states-of-america.png" alt="vi" width={20} height={20} />
+         <Image src="/LOGO/united-states-of-america.png" alt="vi" width={16} height={16} />
         EN
       </button>
     </div>

@@ -34,7 +34,7 @@ export default function RootLayout({
         <link rel="icon" href="/LOGO/tooth.png" sizes="any"  />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased roboto`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         <Menu />
         <ToastContainer />

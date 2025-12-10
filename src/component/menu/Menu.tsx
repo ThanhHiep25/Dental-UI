@@ -227,8 +227,8 @@ const Menu: React.FC = () => {
         <div className="flex items-center gap-2 justify-center ml-3 cursor-pointer">
           <Link href="/">
             <div className="flex items-center gap-2 justify-center">
-              <Image src="/LOGO/tooth.png" width={42} height={42} className="h-10" alt="logo" priority />
-              <h1 className="text-2xl font-bold text-gray-600">HoangBinh Dental</h1>
+              <Image src="/LOGO/tooth.png" width={30} height={20} alt="logo" priority />
+              <h1 className="text-xl font-bold text-gray-600">HoangBinh Dental</h1>
             </div>
           </Link>
         </div>
@@ -241,7 +241,7 @@ const Menu: React.FC = () => {
                   <Link href={item.path} className="h-full" aria-current={isActive ? 'page' : undefined}>
                     <motion.div
                       variants={{ hidden: { opacity: 0, x: '100%' }, animate: { opacity: 1, x: 0 }, hover: { scale: 1.03 }, tap: { scale: 0.98 } }}
-                      className={`h-full font-bold text-lg px-4 py-1 rounded-lg relative overflow-hidden transition-colors duration-200 ${isActive ? 'text-purple-600' : 'text-gray-600 group-hover:text-purple-600'}`}
+                      className={`h-full font-bold text-[14px] px-4 py-1 rounded-lg relative overflow-hidden transition-colors duration-200 ${isActive ? 'text-purple-600' : 'text-gray-600 group-hover:text-purple-600'}`}
                       initial="hidden"
                       animate="animate"
                       whileHover="hover"
@@ -316,7 +316,7 @@ const Menu: React.FC = () => {
                   </AnimatePresence>
                 </div>
             ) : (
-                <motion.button onClick={() => setShowAuthModal(true)} whileTap={{ scale: 0.95 }} className="text-lg font-bold text-white py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+                <motion.button onClick={() => setShowAuthModal(true)} whileTap={{ scale: 0.95 }} className="text-[15px] font-bold text-white py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
                   {t('login')}
                 </motion.button>
             )}
