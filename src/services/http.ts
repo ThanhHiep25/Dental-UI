@@ -103,14 +103,30 @@ http.interceptors.response.use(
   async (error: AxiosError) => {
     try {
       const resp = error?.response;
-      const info = {
-        url: resp?.config && ((resp.config.baseURL || '') + (resp.config.url || '')),
-        status: resp?.status,
-        data: resp?.data,
-        message: error.message,
+      // Build a safe info object with fallbacks to avoid empty object logs
+      const info: Record<string, unknown> = {
+        url: resp?.config ? ((resp.config.baseURL || '') + (resp.config.url || '')) : undefined,
+        status: resp?.status ?? undefined,
+        data: resp?.data ?? undefined,
+        message: error?.message ?? undefined,
+        isAxiosError: (error as any)?.isAxiosError ?? undefined,
+        code: (error as any)?.code ?? undefined,
         timestamp: Date.now(),
       };
-      console.error('[http] Response error <-', info);
+
+      // If the info object has no useful properties, fall back to error.toJSON() or stack
+      const hasUseful = Object.values(info).some((v) => v !== undefined && v !== null && !(Array.isArray(v) && v.length === 0));
+      if (hasUseful) {
+        console.error('[http] Response error <-', info);
+      } else {
+        try {
+          // AxiosError may provide toJSON for better serialization
+          const alt = (error as any)?.toJSON ? (error as any).toJSON() : { message: error?.message, stack: error?.stack };
+          console.error('[http] Response error <-', alt);
+        } catch (e) {
+          console.error('[http] Response error <-', error);
+        }
+      }
       try {
         if (typeof window !== 'undefined') {
           window.__lastHttpLog = { ...window.__lastHttpLog || {}, error: info };

@@ -223,20 +223,20 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess }) => 
           <AnimatePresence mode="wait">
             {isForgotPassword ? (
               <motion.div key="forgot" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <Image src="/LOGO/Logo_Horizontal_Light_1-1024x237.png.webp" alt="Logo" width={200} height={100} className="mb-8 mx-auto" />
+                <Image hidden src="/LOGO/Logo_Horizontal_Light_1-1024x237.png.webp" alt="Logo" width={200} height={100} className="mb-8 mx-auto" />
                 <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} email={email} setEmail={setEmail} loading={forgotPasswordLoading} />
                 {forgotPasswordMessage && <div className="mt-4 text-green-600 text-center font-semibold">{forgotPasswordMessage}</div>}
                 <button onClick={() => { setIsForgotPassword(false); setForgotPasswordMessage(''); }} className="w-full mt-4 text-center text-purple-600 font-medium hover:underline">Quay lại đăng nhập</button>
               </motion.div>
             ) : isRegistering ? (
               <motion.div key="register" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <Image src="/LOGO/Logo_Horizontal_Light_1-1024x237.png.webp" alt="Logo" width={200} height={100} className="mb-8 mx-auto" />
+                <Image hidden src="/LOGO/Logo_Horizontal_Light_1-1024x237.png.webp" alt="Logo" width={200} height={100} className="mb-8 mx-auto" />
                 <RegisterForm onSubmit={handleRegisterSubmit} email={email} setEmail={setEmail} userName={userName} setUserName={setUserName} password={password} setPassword={setPassword} />
                 <button onClick={() => setIsRegistering(false)} className="w-full mt-4 text-center text-purple-600 font-medium hover:underline">Bạn đã có tài khoản? Đăng nhập ngay</button>
               </motion.div>
             ) : (
               <motion.div key="login" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <Image src="/LOGO/Logo_Horizontal_Light_1-1024x237.png.webp" alt="Logo" width={200} height={100} className="mb-4 mx-auto" />
+                <Image hidden src="/LOGO/Logo_Horizontal_Light_1-1024x237.png.webp" alt="Logo" width={200} height={100} className="mb-4 mx-auto" />
                 <form onSubmit={handleLoginSubmit} className="space-y-4">
                   <div>
                     <label className="block text-purple-700">Email</label>

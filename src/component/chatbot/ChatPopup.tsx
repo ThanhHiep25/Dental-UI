@@ -2,9 +2,10 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { X, Send, CheckCircle, Calendar, Clock, User } from 'lucide-react';
+import { X, Send, CheckCircle, Calendar, Clock, User, Trash } from 'lucide-react';
 import { DentistAPI, type Dentist } from '@/services/dentist';
 import ChatAPI, { AssistResponse, QuickBookingRequest } from '@/services/chat';
+import { getServices, type Service } from '@/services/services';
 
 interface ChatPopupProps {
   onClose: () => void;
@@ -14,6 +15,15 @@ interface ChatPopupProps {
 interface Message {
   sender: 'user' | 'bot';
   content: React.ReactNode;
+  meta?: any;
+}
+
+// Serializable form stored in localStorage
+interface StoredMessage {
+  sender: 'user' | 'bot';
+  text: string;
+  timestamp: number;
+  meta?: any;
 }
 
 
@@ -221,6 +231,157 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ onClose }) => {
     return result;
   };
 
+  // --- Chat persistency helpers ---
+  const getChatStorageKey = (): string => {
+    try {
+      const raw = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        const id = parsed?.id || parsed?.username || parsed?.email || parsed?.userId || 'user';
+        return `chat_history:${String(id)}`;
+      }
+    } catch {
+      // ignore
+    }
+    return 'chat_history:anon';
+  };
+
+  const extractTextFromNode = (node: React.ReactNode): string => {
+    if (node == null) return '';
+    if (typeof node === 'string' || typeof node === 'number') return String(node);
+    if (Array.isArray(node)) return node.map(extractTextFromNode).filter(Boolean).join('\n');
+    if (React.isValidElement(node)) {
+      // @ts-ignore children may exist
+      const { type, props } = node as any;
+      // handle explicit <br />
+      if (typeof type === 'string' && type.toLowerCase() === 'br') return '\n';
+
+      const childrenText = extractTextFromNode(props?.children);
+      // treat block-level tags as paragraph breaks
+      const blockTags = typeof type === 'string' && ['p', 'div', 'li', 'section', 'article', 'header', 'footer', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'table', 'tr'].includes(type.toLowerCase());
+      if (blockTags) {
+        return (childrenText ? childrenText.trim() + '\n' : '\n');
+      }
+      // fragments or inline elements: keep gentle spacing
+      return childrenText ? childrenText.trim() + ' ' : '';
+    }
+    // fallback
+    try {
+      return String(node);
+    } catch {
+      return '';
+    }
+  };
+
+  const serializeMessages = (msgs: Message[]): StoredMessage[] => {
+    return msgs.map(m => {
+      const text = extractTextFromNode(m.content).trim() || (m.sender === 'user' ? '...' : '...');
+      const ts = (m as any).timestamp || Date.now();
+      const out: StoredMessage = { sender: m.sender, text, timestamp: ts };
+      if ((m as any).meta) out.meta = (m as any).meta;
+      return out;
+    });
+  };
+
+  const renderAssistPreview = (data: any): React.ReactNode => {
+    if (!data) return null;
+    const intro = data.messageSummary || data.reply || '';
+    return (
+      <div className="flex flex-col gap-3">
+        {intro ? <p className="text-sm text-gray-700 mb-2">{intro}</p> : null}
+        {Array.isArray(data.suggestedServices) && data.suggestedServices.length > 0 && (
+          <div className="text-sm text-gray-700">
+            <ul className="space-y-1">
+              {data.suggestedServices.map((s: any, i: number) => (
+                <li key={i} className="flex items-start gap-2">
+                  <div className="font-medium">{s.name || s.serviceName || s.title}</div>
+                  {s.price ? <div className="text-xs text-gray-500">• {s.price}</div> : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {Array.isArray(data.suggestedDates) && data.suggestedDates.length > 0 && (
+          <div className="text-sm text-gray-700">
+            <div className="font-medium">Gợi ý ngày:</div>
+            <div className="flex gap-2 flex-wrap">{data.suggestedDates.map((d: any, idx: number) => <span key={idx} className="px-2 py-1 bg-gray-100 rounded text-xs">{d}</span>)}</div>
+          </div>
+        )}
+        {Array.isArray(data.suggestedTimes) && data.suggestedTimes.length > 0 && (
+          <div className="text-sm text-gray-700">
+            <div className="font-medium">Gợi ý giờ:</div>
+            <div className="flex gap-2 flex-wrap">{data.suggestedTimes.map((t: any, idx: number) => <span key={idx} className="px-2 py-1 bg-gray-100 rounded text-xs">{t}</span>)}</div>
+          </div>
+        )}
+        {Array.isArray(data.suggestedDentists) && data.suggestedDentists.length > 0 && (
+          <div className="text-sm text-gray-700">
+            <div className="font-medium">Gợi ý bác sĩ:</div>
+            <ul className="space-y-1">
+              {data.suggestedDentists.map((d: any, i: number) => <li key={i} className="text-xs">{d.name || d}</li>)}
+            </ul>
+          </div>
+        )}
+        {Array.isArray(data.quickBookingTemplates) && data.quickBookingTemplates.length > 0 && (
+          <div className="text-sm text-gray-700">
+            <div className="font-medium">Mẫu đặt nhanh:</div>
+            <div className="flex flex-col gap-2">
+              {data.quickBookingTemplates.map((t: any, i: number) => (
+                <div key={i} className="p-2 bg-gray-50 rounded text-xs border">{t.title || t.notes || `${t.serviceName || ''} ${t.date || ''} ${t.time || ''}`}</div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  // Load history on mount
+  useEffect(() => {
+    try {
+      const key = getChatStorageKey();
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        let parsed: any = JSON.parse(raw);
+        // support legacy shapes: { messages: [...] } or direct array
+        if (!Array.isArray(parsed) && parsed && Array.isArray(parsed.messages)) parsed = parsed.messages;
+
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const restored: Message[] = parsed.map((s: any) => {
+            if (typeof s === 'string') return { sender: 'bot', content: s };
+            if (s && typeof s === 'object') {
+              const sender = s.sender === 'user' ? 'user' : 'bot';
+              const text = s.text ?? s.content ?? s.message ?? '';
+              return { sender, content: String(text) };
+            }
+            return { sender: 'bot', content: String(s) };
+          });
+          setMessages(restored);
+        }
+      }
+    } catch {
+      // ignore load errors
+    }
+  }, []);
+
+  // Save history when messages change
+  useEffect(() => {
+    try {
+      const key = getChatStorageKey();
+      const serial = serializeMessages(messages).slice(-100); // keep last 100 messages
+      localStorage.setItem(key, JSON.stringify(serial));
+    } catch {
+      // ignore save errors
+    }
+  }, [messages]);
+
+  const clearHistory = () => {
+    try {
+      const key = getChatStorageKey();
+      localStorage.removeItem(key);
+    } catch { }
+    setMessages([]);
+  };
+
   // Normalize Vietnamese: remove diacritics and lowercase for fuzzy contains matching
   const norm = (s?: string) => (s || '')
     .normalize('NFD')
@@ -249,6 +410,24 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ onClose }) => {
     }
   }, [stage, dentists.length, loadingDentists]);
 
+  // Load available services to map serviceId -> serviceName for display
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        const list: Service[] = await getServices();
+        if (Array.isArray(list) && list.length > 0) {
+          const names: Record<number, string> = {};
+          list.forEach(s => { if (s && typeof s.id === 'number') names[s.id] = s.name; });
+          if (Object.keys(names).length > 0) setServiceNames(prev => ({ ...prev, ...names }));
+        }
+      } catch {
+        // ignore service load errors
+      }
+    };
+
+    void loadServices();
+  }, []);
+
   const handleSendMessage = async () => {
     if (inputValue.trim()) {
       // Thêm tin nhắn của người dùng vào danh sách
@@ -259,17 +438,18 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ onClose }) => {
       // Bước 1: Gọi /generate để trả lời tự nhiên và (nếu có) phát hiện intent
       setLoadingAssist(true);
       try {
-  const userText = String(newUserMessage.content);
-  const gen = await ChatAPI.generate(userText, '');
+        const userText = String(newUserMessage.content);
+        const gen = await ChatAPI.generate(userText, '');
         const replyText = gen?.reply;
-  const hints = parseBookingHints(userText);
-  const looksLikeBooking = (gen?.type === 'booking') || (/BOOKING/i.test(gen?.intent || '')) || isBookingLike(userText) || Boolean(hints.date || hints.time || hints.phone || hints.email);
+        const hints = parseBookingHints(userText);
+        const looksLikeBooking = (gen?.type === 'booking') || (/BOOKING/i.test(gen?.intent || '')) || isBookingLike(userText) || Boolean(hints.date || hints.time || hints.phone || hints.email);
 
         if (!looksLikeBooking) {
           // Trả lời chitchat/QA tự nhiên
+          const textReply = replyText || 'Tôi có thể giúp gì thêm cho bạn?';
           setMessages((prev) => [
             ...prev,
-            { sender: 'bot', content: <p className="text-sm text-gray-700">{replyText || 'Tôi có thể giúp gì thêm cho bạn?'}</p> },
+            { sender: 'bot', content: <p className="text-sm text-gray-700">{textReply}</p>, meta: { type: 'text', text: textReply } },
           ]);
         } else {
           // Bước 2: Intent là booking → gọi /assist để lấy suggestions (services/dates/times/dentists/templates)
@@ -301,7 +481,7 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ onClose }) => {
 
           if (data.type === 'chitchat') {
             const reply = data.reply || data.messageSummary || replyText || 'Xin chào! Tôi có thể giúp gì cho bạn?';
-            setMessages((prev) => [...prev, { sender: 'bot', content: <p className="text-sm text-gray-700">{reply}</p> }]);
+            setMessages((prev) => [...prev, { sender: 'bot', content: <p className="text-sm text-gray-700">{reply}</p>, meta: { type: 'text', text: reply } }]);
           } else {
             const intro = data.messageSummary || replyText;
             const content = (
@@ -472,7 +652,7 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ onClose }) => {
                 )}
               </div>
             );
-            setMessages((prev) => [...prev, { sender: 'bot', content }]);
+            setMessages((prev) => [...prev, { sender: 'bot', content, meta: { type: 'assist', data } }]);
 
             // Auto-open form fill with best-effort prefill when user intends to book
             try {
@@ -519,7 +699,8 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ onClose }) => {
         }
       } catch {
         // Nếu generate/assist lỗi, trả lời fallback ngắn gọn
-        setMessages((prev) => [...prev, { sender: 'bot', content: <p className="text-sm text-red-600">Không thể xử lý lúc này. Bạn vui lòng thử lại.</p> }]);
+        const errText = 'Không thể xử lý lúc này. Bạn vui lòng thử lại.';
+        setMessages((prev) => [...prev, { sender: 'bot', content: <p className="text-sm text-red-600">{errText}</p>, meta: { type: 'text', text: errText } }]);
       } finally {
         setLoadingAssist(false);
       }
@@ -538,7 +719,7 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ onClose }) => {
 
   return (
     <motion.div
-  className="fixed bottom-30 right-8 z-50 w-80 md:w-96 max-h-[70vh] bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden"
+      className="fixed bottom-30 right-8 z-50 w-80 md:w-96 max-h-[70vh] bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden"
       variants={chatVariants}
       initial="hidden"
       animate="visible"
@@ -560,13 +741,23 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ onClose }) => {
             <p className="text-xs text-white/80">Trợ lý đặt lịch nhanh</p>
           </div>
         </div>
-        <button
-          onClick={onClose}
-          className="text-white/80 hover:text-white transition-colors"
-          aria-label="Đóng chat"
-        >
-          <X size={20} />
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={clearHistory}
+            className="text-white/80 hover:text-white/90 transition-colors p-2 rounded"
+            aria-label="Xoá lịch sử chat"
+            title="Xoá lịch sử chat"
+          >
+            <Trash size={18} />
+          </button>
+          <button
+            onClick={onClose}
+            className="text-white/80 hover:text-white transition-colors p-2 rounded"
+            aria-label="Đóng chat"
+          >
+            <X size={20} />
+          </button>
+        </div>
       </div>
 
       {/* Chat Messages */}
@@ -759,7 +950,7 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ onClose }) => {
                     setStage('result');
                     setSelected(null);
                   } catch (e: unknown) {
-                    const err = e as { response?: { data?: { message?: string } } ; message?: string };
+                    const err = e as { response?: { data?: { message?: string } }; message?: string };
                     const msg = err?.response?.data?.message || err?.message || 'Đặt lịch thất bại, vui lòng thử lại.';
                     setBookError(msg);
                   } finally {

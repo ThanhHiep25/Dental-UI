@@ -36,13 +36,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        <Menu />
-        <ToastContainer />
-        <Providers>
-          {children}
-        </Providers>
-        <ScrollTop />
-        <Footer />
+            <Providers>
+              <Menu />
+              <ToastContainer />
+              {children}
+              <ScrollTop />
+              <Footer />
+            </Providers>
       </body>
     </html>
   );

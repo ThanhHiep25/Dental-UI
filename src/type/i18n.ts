@@ -24,8 +24,12 @@ i18n
       escapeValue: false,
     },
     detection: {
-      order: ['localStorage', 'navigator', 'querystring', 'cookie'],
-      caches: ['localStorage'],
+      // Remove `navigator` from detection order so server and client
+      // render the same default language when no explicit choice exists.
+      // This prevents hydration mismatches where server falls back to
+      // 'vi' but the client picks the browser language (e.g. 'en').
+      order: ['localStorage', 'cookie', 'querystring'],
+      caches: ['localStorage', 'cookie'],
     },
   });
 
