@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
                 <div className="md:flex md:justify-between">
                     <div className="mb-6 md:mb-0">
                         <a href="" className="flex items-center">
-                            <Image src="/LOGO/tooth.png" alt="FlowBite Logo" width={32} height={32} className="h-10 me-3" />
+                            <Image src="/LOGO/tooth.png" alt="FlowBite Logo" width={40} height={32} className="h-10 me-3" />
                             <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-400">HoangBinh Dental</span>
                         </a>
                     </div>

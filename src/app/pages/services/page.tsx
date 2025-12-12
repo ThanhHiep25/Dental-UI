@@ -88,7 +88,7 @@ const Services: React.FC = () => {
                 transition={{ duration: 0.5 }}
                 exit={{ opacity: 0, y: -20 }}
                 className='md:text-5xl text-3xl font-bold text-center text-purple-800 mt-20 mb-10'>
-                Dịch Vụ Nha Khoa
+                {t('service_dental')}
             </motion.h1>
 
             <motion.p
@@ -96,8 +96,8 @@ const Services: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 exit={{ opacity: 0, y: -20 }}
-                className='text-lg text-center max-w-4xl mx-auto'>Hoang Binh mang lại cho bàn trải nghiệm hoàn thiện nụ cười thoải mái nhất bằng cách điều trị một cách triệt để các vấn đề về răng miệng,
-                chăm sóc mọi mặt từ khi bạn bước vào và theo dõi hậu điều trị để đảm bảo mọi thứ được hoàn hảo nhất có thể.</motion.p>
+                className='text-lg text-center max-w-4xl mx-auto'>{t('service_dental_des')}
+                </motion.p>
 
 
             <div className="grid md:grid-cols-4 grid-cols-2 gap-4 mt-20">
