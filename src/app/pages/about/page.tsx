@@ -125,9 +125,9 @@ const About: React.FC = () => {
                         <p>🍃 {t('t_banner_about_4')} </p>
                     </div>
 
-                    <button className="bg-cyan-300 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full mt-5 text-xl h-16 roboto-900 w-full">
+                    {/* <button className="bg-cyan-300 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full mt-5 text-xl h-16 roboto-900 w-full">
                         {t('book_consultation_now')}
-                    </button>
+                    </button> */}
                 </motion.div>
 
                 <motion.div
@@ -135,8 +135,9 @@ const About: React.FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8 }}
-                    className="md:w-1/2 w-full">
-                    <motion.img src="/IMGABOUT/residential.png" alt="location" className='w-full h-[512px]' />
+                    className="md:w-1/2 w-full h-full flex justify-center items-center rounded-2xl overflow-hidden border-4 border-purple-300 shadow-lg">
+                    <video autoPlay loop muted src="/IMGServices/invisalign_orthodontics/Camtu-Invisalign-compressed.mp4" 
+                    />
                 </motion.div>
 
             </section>
@@ -197,7 +198,7 @@ const About: React.FC = () => {
 
                 <div className="max-w-5xl mx-auto mt-10">
                     <div className="w-full h-[512px] bg-gray-400 flex justify-center items-center rounded-2xl">
-                        <p className='text-center text-white text-5xl roboto-900'>Video</p>
+                        <video autoPlay loop muted src="/IMGServices/invisalign_orthodontics/Camtu-Invisalign-compressed.mp4" className="w-full h-full object-cover rounded-2xl" />
                     </div>
                 </div>
 

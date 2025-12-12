@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 
 const upcomingEvents = [
@@ -56,15 +57,11 @@ const UpcomingEvents: React.FC = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="grid md:grid-cols-2 gap-8 mb-10">
-          <div className="flex items-center justify-center h-80 bg-gray-300 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">
-              Video 1
-            </h3>
+          <div className="flex items-center justify-center h-100 rotate-6 bg-gray-300/60 backdrop-blur-3xl rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+           <Image src="/IMGServices/porcelain_veneer/whitening-choosing-compressed.jpg" alt="Logo" width={400} height={400} className='rounded-lg' />
           </div>
-          <div className="flex items-center justify-center h-80 bg-gray-300 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">
-              Video 2
-            </h3>
+          <div className="flex items-center justify-center h-100 bg-gray-300/60 backdrop-blur-3xl rotate-6 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+            <Image src="/IMGServices/porcelain_veneer/whitening-mirror2-compressed.jpg" alt="Logo" width={400} height={400} className='rounded-lg' />
           </div>
         </motion.div>
 
