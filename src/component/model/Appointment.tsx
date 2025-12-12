@@ -8,6 +8,7 @@ import { getServices, Service } from '@/services/services';
 import { sendConsultation, quickBooking, validateQuickBooking, QuickBookingPayload } from '@/services/appointment';
 import { UserAPI, ApiResponse, UserProfile } from '@/services/user';
 import { Dentist, DentistAPI } from '@/services/dentist';
+import { Branch, BranchAPI } from '@/services/branches';
 
 interface AppointmentModalProps {
     isOpen: boolean;
@@ -32,11 +33,13 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [dentistId, setDentistId] = useState<number | ''>('');
+    const [branchId, setBranchId] = useState<number | ''>('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [notes, setNotes] = useState('');
     const [dentists, setDentists] = useState<Dentist[]>([]);
     const [services, setServices] = useState<Service[]>([]);
+    const [branches, setBranches] = useState<Branch[]>([]);
 
     const [serviceId, setServiceId] = useState<number | ''>('');
 
@@ -89,6 +92,17 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                 }
             } catch (err) {
                 console.error('Failed to load dentists', err);
+            }
+        })();
+
+        (async () => {
+            try {
+                const res = await BranchAPI.getBranches();
+                if (res && res.success && res.data) {
+                    setBranches(res.data);
+                }
+            } catch (err) {
+                console.error('Failed to load branches', err);
             }
         })();
 
@@ -181,7 +195,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
 
         try {
             setLoading(true);
-           
+
 
             if (activeTab === 'consultation') {
                 const payload = {
@@ -190,6 +204,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     phone,
                     method: consultationMethod,
                     content: consultationContent || notes,
+                    branchId: Number(branchId) || undefined,
                 };
                 const json = await sendConsultation(payload);
                 if (json && json.success) {
@@ -209,6 +224,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     setConsultationMethod('Zalo');
                     setConsultationContent('');
                     setNotes('');
+                    setBranchId('');
                     //  setTimeout(() => onClose(), 1200);
                 } else {
                     const msg = json?.message || 'Gửi tư vấn thất bại';
@@ -269,6 +285,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     phone,
                     serviceId: Number(serviceId) || 0,
                     dentistId: Number(dentistId) || undefined,
+                    branchId: Number(branchId) || undefined,
                     date: formatDateForBackend(date),
                     time,
                     // add a canonical ISO scheduled time and a localized representation with timezone offset
@@ -281,7 +298,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     const validation = validateQuickBooking(payload);
                     if (!validation.valid) {
                         const msg = validation.errors.join('; ');
-                      
+
                         toast.error(msg, { position: 'top-right', autoClose: 5000, theme: 'light' });
                         setLoading(false);
                         return;
@@ -292,7 +309,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
 
                 const json = await quickBooking(payload);
                 if (json && json.success) {
-                    const msg = 'Lịch hẹn của bạn đã được đặt thành công. Chúng tôi sẽ liên hệ xác nhận với bạn sớm nhất';                
+                    const msg = 'Lịch hẹn của bạn đã được đặt thành công. Chúng tôi sẽ liên hệ xác nhận với bạn sớm nhất';
                     toast.success(msg, {
                         position: "top-right",
                         autoClose: 5000,
@@ -308,6 +325,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     setEmail('');
                     setPhone('');
                     setDentistId('');
+                    setBranchId('');
                     setServiceId('');
                     setDate('');
                     setTime('');
@@ -423,6 +441,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                                         <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full mt-1 p-3 border-b border-b-yellow-400 border-gray-300 focus:outline-none" required />
                                     </div>
 
+
                                     <div className="md:w-full mt-5">
                                         <h3 className="text-purple-700 mb-4">Phương thức tư vấn</h3>
                                         <div className="w-full flex flex-wrap gap-4 items-center">
@@ -485,6 +504,14 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div className="mt-5 md:w-full">
+                                    <label className="block text-purple-700">Chi nhánh (tuỳ chọn)</label>
+                                    <select value={branchId} onChange={(e) => setBranchId(e.target.value === '' ? '' : Number(e.target.value))} className="w-full mt-1 p-3 rounded-md border border-yellow-400 focus:outline-none">
+                                        <option value="">Chọn chi nhánh</option>
+                                        {branches.map(b => <option key={b.id} value={b.id}>{b.name}{b.address ? ` - ${b.address}` : ''}</option>)}
+                                    </select>
                                 </div>
 
                                 <div className="mt-5">
@@ -594,7 +621,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                                                                     <span className="font-medium">Email:</span> {dent.email}
                                                                 </span>
                                                                 <span className="inline-flex items-center gap-1 text-purple-700"></span>
-                                                                <span className="font-medium">Sđt: {dent.phone}</span>
+                                                                {/* <span className="font-medium">Sđt: {dent.phone}</span> */}
                                                             </div>
                                                             {dent.specialization && (
                                                                 <p className="mt-1 text-gray-600">{dent.specialization}</p>
@@ -606,6 +633,15 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                                             </div>
                                         </>
                                     )}
+                                </div>
+
+                                <div className="md:w-full mt-4">
+                                    <label className="block text-purple-700">Chi nhánh</label>
+                                    <select value={branchId} onChange={(e) => setBranchId(e.target.value === '' ? '' : Number(e.target.value))}
+                                        className="w-full p-3 rounded-md border border-yellow-400 focus:outline-none" required>
+                                        <option value="">Chọn chi nhánh</option>
+                                        {branches.map(b => <option key={b.id} value={b.id}>{b.name}{b.address ? ` - ${b.address}` : ''}</option>)}
+                                    </select>
                                 </div>
 
 

@@ -298,9 +298,9 @@ const Menu: React.FC = () => {
                             <CircleUser className="mr-2 text-gray-400" /> {t('profile') || 'Profile'}
                           </button>
                           <div className="w-full h-px bg-gray-200 my-1" />
-                          <button onClick={() => { router.push('/settings'); setShowProfileDropdown(false); }} className="w-full flex items-center text-left text-sm text-gray-600 py-2 px-4 hover:bg-gray-100 rounded-md transition-colors duration-200">
+                          {/* <button onClick={() => { router.push('/settings'); setShowProfileDropdown(false); }} className="w-full flex items-center text-left text-sm text-gray-600 py-2 px-4 hover:bg-gray-100 rounded-md transition-colors duration-200">
                             <Settings2 className="mr-2 text-gray-400" /> {t('settings') || 'Settings'}
-                          </button>
+                          </button> */}
                           <div className="w-full h-px bg-gray-200 my-1" />
                           {role === 'DENTIST' && (
                             <button onClick={() => { router.push('/pages/dentist/appointments'); setShowProfileDropdown(false); }} className="w-full flex items-center text-left text-sm text-gray-600 py-2 px-4 hover:bg-gray-100 rounded-md transition-colors duration-200">

@@ -14,6 +14,7 @@ export interface QuickBookingPayload {
     // HH:mm
     time: string;
     dentistId?: number | null;
+    branchId?: number | null;
     notes?: string;
     // Optional extra time representations we may include for backend compatibility
     scheduledTime?: string; // local wall-clock (e.g. "2025-11-08 10:49 +07:00")

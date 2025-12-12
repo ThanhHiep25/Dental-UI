@@ -138,7 +138,7 @@ return (
                         className="drop-shadow-lg"
                     />
                 </div>
-                <h1 className="text-5xl md:text-6xl roboto-900 mb-4 leading-tight">
+                <h1 className="text-5xl md:text-6xl roboto-900 mb-4 leading-tight font-bold">
                     {t('name_dental') || "Nha Khoa Chuyên Nghiệp"}
                 </h1>
                 <p className="text-xl md:text-2xl text-purple-100 roboto-600 mb-6">
@@ -160,7 +160,7 @@ return (
         {/* Contact Info Section */}
         <section className="max-w-6xl mx-auto px-4 py-16">
             <motion.h2
-                className="text-4xl roboto-900 text-center mb-12 text-gray-800"
+                className="text-4xl roboto-900 font-bold text-center mb-12 text-gray-800"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
@@ -181,7 +181,7 @@ return (
                     >
                         <div className="bg-gradient-to-r from-purple-500 to-blue-500 h-1"></div>
                         <div className="p-6">
-                            <h3 className="text-xl roboto-900 text-gray-800 mb-4">{branch.name}</h3>
+                            <h3 className="text-xl roboto-900 font-bold text-gray-800 mb-4">{branch.name}</h3>
 
                             <div className="space-y-3 mb-6">
                                 <div className="flex items-start gap-3 text-gray-700">
@@ -223,7 +223,7 @@ return (
                     className="bg-white rounded-xl shadow-2xl overflow-hidden border-2 border-purple-200 mb-12"
                 >
                     <div className="p-8">
-                        <h3 className="text-3xl roboto-900 text-gray-800 mb-8">
+                        <h3 className="text-3xl roboto-900 font-bold text-gray-800 mb-8">
                             {branches.find(b => b.id === expandedBranch)?.name}
                         </h3>
 
@@ -253,7 +253,7 @@ return (
                                 className="space-y-6"
                             >
                                 <div>
-                                    <h4 className="text-xl roboto-900 text-gray-800 mb-4 flex items-center gap-2">
+                                    <h4 className="text-xl roboto-900 font-bold text-gray-800 mb-4 flex items-center gap-2">
                                         <Clock size={24} className="text-purple-600" />
                                         Giờ hoạt động
                                     </h4>
@@ -261,7 +261,7 @@ return (
                                         {branches.find(b => b.id === expandedBranch)?.hours.map((hour, idx) => (
                                             <div key={idx} className="flex justify-between items-center">
                                                 <span className="font-semibold text-gray-700">{hour.day}:</span>
-                                                <span className="text-purple-600 roboto-700">{hour.time}</span>
+                                                <span className="text-purple-600 font-bold roboto-700">{hour.time}</span>
                                             </div>
                                         ))}
                                     </div>

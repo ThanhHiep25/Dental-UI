@@ -116,7 +116,7 @@ const About: React.FC = () => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8 }}
                     className="md:w-1/2 w-full leading-7">
-                    <h1 className='text-5xl roboto-900 text-purple-800 mb-5'>{t('Exquisite beauty and practical application')}</h1>
+                    <h1 className='text-5xl roboto-900 text-purple-800 mb-5 font-bold'>{t('Exquisite beauty and practical application')}</h1>
                     <p className='text-justify text-lg'>{t('t_banner_about')}</p>
                     <div className="mt-5 text-lg leading-10 roboto-900 text-purple-800">
                         <p>🍃 {t('t_banner_about_1')} </p>
@@ -144,7 +144,7 @@ const About: React.FC = () => {
 
 
             <section className="bg-purple-700 w-full p-20">
-                <h2 className="text-center text-white text-5xl roboto-900 mb-5">
+                <h2 className="text-center text-white text-5xl roboto-900 font-bold mb-5">
                     {t('Core values')}
                 </h2>
 
@@ -170,7 +170,7 @@ const About: React.FC = () => {
                 </div>
 
 
-                <h2 className="text-center text-yellow-500 text-5xl roboto-900 mt-20">
+                <h2 className="text-center text-yellow-500 text-5xl roboto-900 font-bold mt-20">
                     {t('Scan 3D CT')}
                 </h2>
 
