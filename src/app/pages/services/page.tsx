@@ -39,10 +39,10 @@ const Services: React.FC = () => {
         },
         {
             id: 3,
-            title: 'periodontal_treatment',
-            description: 'periodontal_treatment',
+            title: 'periodontic_gum_diseases',
+            description: 'periodontic_gum_diseases',
             image: '/IMGServices/Periodontic-2-compresesd.jpg.webp',
-            content: 'periodontal_treatment',
+            content: 'periodontic_gum_diseases',
             link: '/pages/services/periodontic_gum_diseases',
             status: true
 
