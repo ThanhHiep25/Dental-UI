@@ -23,17 +23,17 @@ const Services: React.FC = () => {
         {
             id: 1,
             title: 'cosmetic_porcelain_teeth',
-            description: 'cosmetic_des1',
+            description: 'cosmetic_porcelain_teeth',
             image: '/IMGServices/dental-crown-compressed.jpg.webp',
-            content: 'cosmetic_content1',
+            content: 'cosmetic_porcelain_teeth',
             link: '/pages/services/cosmetic_porcelain_teeth',
             status: true
         }, {
             id: 2,
             title: 'porcelain_veneer',
-            description: 'porcelain_veneer_des',
+            description: 'porcelain_veneer',
             image: '/IMGServices/Veneers-compressed.jpg.webp',
-            content: 'porcelain_veneer_content',
+            content: 'porcelain_veneer',
             link: '/pages/services/porcelain_veneer',
             status: true
         },
@@ -42,7 +42,7 @@ const Services: React.FC = () => {
             title: 'periodontal_treatment',
             description: 'periodontal_treatment',
             image: '/IMGServices/Periodontic-2-compresesd.jpg.webp',
-            content: 'invisalign_orthodontics_content',
+            content: 'periodontal_treatment',
             link: '/pages/services/periodontic_gum_diseases',
             status: true
 

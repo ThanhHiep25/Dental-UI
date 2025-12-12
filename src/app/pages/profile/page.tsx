@@ -461,8 +461,13 @@ const ProfilePage: React.FC = () => {
 
     if (isLoading) {
         return (
-            <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
-                <LoaderCircle className="animate-spin text-blue-500" size={68} />
+            <div className="flex items-center justify-center h-screen">
+                <motion.img
+                    src="/cardio-unscreen.gif"
+                    alt="Loading..."
+                    transition={{ duration: 1, repeat: Infinity }}
+                    className="w-32 h-32"
+                />
             </div>
         );
     }
@@ -741,7 +746,7 @@ const ProfilePage: React.FC = () => {
                                             <div className="flex items-center gap-2">
                                                 <div>{renderStatusBadge(record.status)}</div>
                                                 <button onClick={() => { setSelectedAppointment(record); setModalEditing(false); fetchServicesAndDentists(); }} className="px-3 py-1 bg-white border rounded text-sm text-blue-600">Chi tiết</button>
-                                                
+
                                             </div>
                                         </div>
                                         <div className="mt-2 text-sm text-gray-600 line-clamp-3" title={String(record.note ?? record.notes ?? '')}>{record.note ?? record.notes ?? ''}</div>
