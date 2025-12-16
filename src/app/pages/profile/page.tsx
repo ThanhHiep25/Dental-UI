@@ -64,18 +64,15 @@ const ProfilePage: React.FC = () => {
         setSelectedPrescription(null);
         
         // Try to get price from multiple possible locations in the response
-        // Priority: serviceTotalPrice > servicePrice > service.snapshotTotalPrice > service.snapshotPrice > service.price
+        // Priority: serviceTotalPrice > servicePrice > service.price
         const svcPrice = appt.serviceTotalPrice 
             ?? appt.servicePrice 
-            ?? appt.service?.snapshotTotalPrice 
-            ?? appt.service?.snapshotPrice 
             ?? appt.service?.price 
             ?? 0;
         
         // Get duration from multiple possible locations
         const duration = appt.serviceDurationMinutes 
             ?? appt.serviceDuration 
-            ?? appt.service?.snapshotDurationMinutes 
             ?? appt.service?.durationMinutes 
             ?? null;
         
@@ -92,10 +89,7 @@ const ProfilePage: React.FC = () => {
             serviceDiscountPercent: appt.serviceDiscountPercent,
             // Nested service fields
             'service.price': appt.service?.price,
-            'service.snapshotPrice': appt.service?.snapshotPrice,
-            'service.snapshotTotalPrice': appt.service?.snapshotTotalPrice,
             'service.durationMinutes': appt.service?.durationMinutes,
-            'service.snapshotDurationMinutes': appt.service?.snapshotDurationMinutes,
             // Calculated values
             svcPrice,
             duration,
