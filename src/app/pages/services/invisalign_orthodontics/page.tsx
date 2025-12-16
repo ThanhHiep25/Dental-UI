@@ -3,9 +3,20 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion"
 import AppointmentModal from '@/component/model/Appointment';
+import AuthModal from '@/component/auth/AuthForms';
 
 const InvisalingnOrthodontics: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
+
+  const handleBookAppointment = () => {
+    const user = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+    if (!user) {
+      setAuthOpen(true);
+    } else {
+      setOpen(true);
+    }
+  };
   return (
     <div>
       <section className="flex max-w-7xl mx-auto my-10 p-5 space-y-5 text-xl ">
@@ -23,7 +34,7 @@ const InvisalingnOrthodontics: React.FC = () => {
             vị trí.
           </p>
           <div className="flex items-center justify-center">
-            <button onClick={() => setOpen(true)} className="w-[400px] h-[50px] bg-amber-500 rounded-2xl flex items-center justify-center ">
+            <button onClick={handleBookAppointment} className="w-[400px] h-[50px] bg-amber-500 rounded-2xl flex items-center justify-center ">
               Đăt lịch ngay
             </button>
           </div>
@@ -108,7 +119,7 @@ const InvisalingnOrthodontics: React.FC = () => {
           </div>
         </div>
         <div className=" flex items-center justify-center ">
-          <button onClick={() => setOpen(true)} className="w-[400px] h-[50px] bg-amber-500 rounded-2xl text-xl ">Đặt lịch tư vấn</button>
+          <button onClick={handleBookAppointment} className="w-[400px] h-[50px] bg-amber-500 rounded-2xl text-xl ">Đặt lịch tư vấn</button>
         </div>
       </section>
       <AppointmentModal
@@ -116,6 +127,14 @@ const InvisalingnOrthodontics: React.FC = () => {
         onClose={() => setOpen(false)}
         defaultTab="appointment"
         defaultServiceSlug="Chỉnh nha Invisalign"
+      />
+      <AuthModal
+        isOpen={authOpen}
+        onClose={() => setAuthOpen(false)}
+        onSuccess={() => {
+          setAuthOpen(false);
+          setOpen(true);
+        }}
       />
     </div>
   );

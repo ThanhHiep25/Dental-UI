@@ -62,13 +62,48 @@ const ProfilePage: React.FC = () => {
     const openPayment = async (appt: AppointmentHistory) => {
         setSelectedAppointment(appt);
         setSelectedPrescription(null);
-        // determine service price
-        let svcPrice = 0;
-        if (appt.service && typeof (appt.service as Service).price === 'number') svcPrice = (appt.service as Service).price as number;
-        if (!svcPrice && appt.serviceId) {
-            const found = services.find(s => s.id === appt.serviceId);
-            if (found && typeof found.price === 'number') svcPrice = found.price as number;
-        }
+        
+        // Try to get price from multiple possible locations in the response
+        // Priority: serviceTotalPrice > servicePrice > service.snapshotTotalPrice > service.snapshotPrice > service.price
+        const svcPrice = appt.serviceTotalPrice 
+            ?? appt.servicePrice 
+            ?? appt.service?.snapshotTotalPrice 
+            ?? appt.service?.snapshotPrice 
+            ?? appt.service?.price 
+            ?? 0;
+        
+        // Get duration from multiple possible locations
+        const duration = appt.serviceDurationMinutes 
+            ?? appt.serviceDuration 
+            ?? appt.service?.snapshotDurationMinutes 
+            ?? appt.service?.durationMinutes 
+            ?? null;
+        
+        // Debug: Log appointment data to check prices
+        console.log('===== PAYMENT MODAL OPENED =====');
+        console.log('Full appointment object:', appt);
+        console.log('Extracted pricing values:', {
+            id: appt.id,
+            serviceName: appt.serviceName,
+            // Top-level fields
+            servicePrice: appt.servicePrice,
+            serviceTotalPrice: appt.serviceTotalPrice,
+            serviceDurationMinutes: appt.serviceDurationMinutes,
+            serviceDiscountPercent: appt.serviceDiscountPercent,
+            // Nested service fields
+            'service.price': appt.service?.price,
+            'service.snapshotPrice': appt.service?.snapshotPrice,
+            'service.snapshotTotalPrice': appt.service?.snapshotTotalPrice,
+            'service.durationMinutes': appt.service?.durationMinutes,
+            'service.snapshotDurationMinutes': appt.service?.snapshotDurationMinutes,
+            // Calculated values
+            svcPrice,
+            duration,
+            typeof_servicePrice: typeof appt.servicePrice,
+            typeof_serviceTotalPrice: typeof appt.serviceTotalPrice
+        });
+        console.log('================================');
+        
         // try to fetch prescriptions and find one for this appointment
         let foundPres: Prescription | null = null;
         try {
@@ -133,7 +168,7 @@ const ProfilePage: React.FC = () => {
     const filteredSortedAppointments = useMemo(() => {
         // dentist name helper (not always present on record)
         const getServiceName = (rec: AppointmentHistory) =>
-            (rec.serviceName ?? rec.service?.name ?? (services.find(s => s.id === rec.serviceId)?.name) ?? '').toLowerCase();
+            (rec.serviceName ?? rec.service?.name ?? '').toLowerCase();
 
         let list = [...appointments];
         // filter by status if requested
@@ -145,7 +180,7 @@ const ProfilePage: React.FC = () => {
         const q = String(serviceQuery || '').trim().toLowerCase();
         if (q.length > 0) {
             list = list.filter(a => {
-                const name = (a.serviceName ?? a.service?.name ?? (services.find(s => s.id === a.serviceId)?.name) ?? '').toString().toLowerCase();
+                const name = (a.serviceName ?? a.service?.name ?? '').toString().toLowerCase();
                 return name.includes(q);
             });
         }
@@ -185,6 +220,17 @@ const ProfilePage: React.FC = () => {
             const cb = getCreatedTime(b);
             return sortDir === 'asc' ? ca - cb : cb - ca;
         });
+        
+        // Debug: Check if pricing data exists in filtered list
+        if (list.length > 0) {
+            console.log('Filtered appointments - first item pricing:', {
+                id: list[0].id,
+                servicePrice: list[0].servicePrice,
+                serviceTotalPrice: list[0].serviceTotalPrice,
+                serviceDurationMinutes: list[0].serviceDurationMinutes
+            });
+        }
+        
         return list;
     }, [appointments, sortBy, sortDir, services, statusFilter, serviceQuery, dateFilter]);
     // Simple localized date-time formatter that is stable between SSR and CSR
@@ -244,10 +290,24 @@ const ProfilePage: React.FC = () => {
                     setIsLoading(false);
                     return;
                 }
+                
+                // Debug: Log raw API response for appointments
+                console.log('Raw appointment history response:', historyRes);
+                console.log('Appointment data sample:', historyRes.data?.[0]);
+                
                 setUserMe(meRes.data);
                 setProfile(profileRes.data as UserProfile);
                 setFormData(profileRes.data as UserProfile);
-                setAppointments(historyRes.data as AppointmentHistory[]);
+                
+                const appointmentsArray = historyRes.data as AppointmentHistory[];
+                console.log('Setting appointments array:', appointmentsArray);
+                console.log('First appointment pricing:', {
+                    servicePrice: appointmentsArray[0]?.servicePrice,
+                    serviceTotalPrice: appointmentsArray[0]?.serviceTotalPrice,
+                    serviceDurationMinutes: appointmentsArray[0]?.serviceDurationMinutes,
+                    typeof_servicePrice: typeof appointmentsArray[0]?.servicePrice
+                });
+                setAppointments(appointmentsArray);
             } catch (err) {
                 console.error(err);
                 setError('Lỗi khi tải dữ liệu người dùng.');
@@ -812,9 +872,31 @@ const ProfilePage: React.FC = () => {
                                                         <div>
                                                             <div className="text-xs text-gray-400">Dịch vụ</div>
                                                             <div className="text-lg font-semibold text-gray-900">{selectedAppointment.serviceName ?? selectedAppointment.service?.name ?? '-'}</div>
+                                                            {selectedAppointment.serviceDurationMinutes && (
+                                                                <div className="text-xs text-gray-500 mt-1">
+                                                                    <Clock size={12} className="inline mr-1" />
+                                                                    Thời gian: {selectedAppointment.serviceDurationMinutes} phút
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
-                                                    {selectedAppointment.service?.price && <div className="text-sm font-medium text-gray-700">{selectedAppointment.service.price}đ</div>}
+                                                    <div className="text-right">
+                                                        {selectedAppointment.servicePrice && (
+                                                            <div className="text-lg font-semibold text-indigo-600">
+                                                                {selectedAppointment.servicePrice.toLocaleString('vi-VN')}đ
+                                                            </div>
+                                                        )}
+                                                        {selectedAppointment.serviceDiscountPercent != null && selectedAppointment.serviceDiscountPercent > 0 && (
+                                                            <div className="text-xs text-green-600 mt-1">
+                                                                Giảm {selectedAppointment.serviceDiscountPercent}%
+                                                            </div>
+                                                        )}
+                                                        {selectedAppointment.serviceTotalPrice && selectedAppointment.serviceTotalPrice !== selectedAppointment.servicePrice && (
+                                                            <div className="text-sm font-medium text-gray-900 mt-1">
+                                                                Tổng: {selectedAppointment.serviceTotalPrice.toLocaleString('vi-VN')}đ
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 </div>
                                                 {/* {selectedAppointment.note || selectedAppointment.notes ? (
                                                     <div className="mt-4 text-sm text-gray-700 whitespace-pre-wrap">{selectedAppointment.note ?? selectedAppointment.notes}</div>
@@ -828,15 +910,17 @@ const ProfilePage: React.FC = () => {
                                                     <span className="inline-flex items-center justify-center w-9 h-9 rounded-md bg-gray-50 text-gray-600"><User size={16} /></span>
                                                     <div>
                                                         <div className="text-xs text-gray-400">Bác sĩ</div>
-                                                        <div className="font-medium text-gray-900">{selectedAppointment.dentistName ?? selectedAppointment.dentistUsername ?? (dentists.find(d => d.id === selectedAppointment.dentistId)?.name) ?? '-'}</div>
-                                                        {selectedAppointment.dentistId && <div className="text-xs text-gray-500 mt-1">ID: {selectedAppointment.dentistId}</div>}
+                                                        <div className="font-medium text-gray-900">{selectedAppointment.dentist?.name ?? selectedAppointment.dentistName ?? selectedAppointment.dentistUsername ?? (dentists.find(d => d.id === selectedAppointment.dentistId)?.name) ?? '-'}</div>
+                                                        {selectedAppointment.dentist?.specialization && <div className="text-xs text-gray-500 mt-1">{selectedAppointment.dentist.specialization}</div>}
+                                                        {selectedAppointment.dentist?.phone && <div className="text-xs text-gray-500 mt-1">{selectedAppointment.dentist.phone}</div>}
                                                     </div>
                                                 </div>
                                                 <div className="shadow-sm rounded-2xl p-4 flex items-start gap-3">
                                                     <span className="inline-flex items-center justify-center w-9 h-9 rounded-md bg-gray-50 text-gray-600"><MapPin size={16} /></span>
                                                     <div>
                                                         <div className="text-xs text-gray-400">Chi nhánh</div>
-                                                        <div className="font-medium text-gray-900">{selectedAppointment.branchName ?? '-'}</div>
+                                                        <div className="font-medium text-gray-900">{selectedAppointment.branch?.name ?? selectedAppointment.branchName ?? '-'}</div>
+                                                        {selectedAppointment.branch?.address && <div className="text-xs text-gray-500 mt-1">{selectedAppointment.branch.address}</div>}
                                                     </div>
                                                 </div>
                                             </div>
@@ -919,15 +1003,16 @@ const ProfilePage: React.FC = () => {
                                 <div className="border border-gray-300 rounded p-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     <div>
                                         <div className="text-xs text-gray-400">Khách hàng</div>
-                                        <div className="font-medium">{selectedAppointment.customerName ?? userMe.fullName ?? userMe.username ?? '-'}</div>
-                                        <div className="text-sm text-gray-500">{userMe.email ?? '-'}</div>
-                                        <div className="text-sm text-gray-500">{profile?.phone ?? userMe.phone ?? '-'}</div>
+                                        <div className="font-medium">{selectedAppointment.customer?.fullName ?? selectedAppointment.customerName ?? userMe.fullName ?? userMe.username ?? '-'}</div>
+                                        <div className="text-sm text-gray-500">{selectedAppointment.customer?.email ?? userMe.email ?? '-'}</div>
+                                        <div className="text-sm text-gray-500">{selectedAppointment.customer?.phone ?? profile?.phone ?? userMe.phone ?? '-'}</div>
                                     </div>
                                     <div>
                                         <div className="text-xs text-gray-400">Nha sĩ</div>
-                                        <div className="font-medium">{selectedAppointment.dentistName ?? selectedAppointment.dentistUsername ?? (dentists.find(d => d.id === selectedAppointment.dentistId)?.name) ?? '-'}</div>
+                                        <div className="font-medium">{selectedAppointment.dentist?.name ?? selectedAppointment.dentistName ?? selectedAppointment.dentistUsername ?? (dentists.find(d => d.id === selectedAppointment.dentistId)?.name) ?? '-'}</div>
+                                        {selectedAppointment.dentist?.specialization && <div className="text-sm text-gray-500">{selectedAppointment.dentist.specialization}</div>}
                                         <div className="text-xs text-gray-400 mt-2">Chi nhánh</div>
-                                        <div className="font-medium">{selectedAppointment.branchName ?? '-'}</div>
+                                        <div className="font-medium">{selectedAppointment.branch?.name ?? selectedAppointment.branchName ?? '-'}</div>
                                     </div>
                                     <div>
                                         <div className="text-xs text-gray-400">Ngày hẹn</div>
@@ -942,8 +1027,18 @@ const ProfilePage: React.FC = () => {
                                 <div className="border border-gray-300 rounded p-3">
                                     <div className="text-xs text-gray-400">Dịch vụ</div>
                                     <div className="flex items-center justify-between mt-1">
-                                        <div className="font-medium">{selectedAppointment.serviceName ?? selectedAppointment.service?.name ?? (services.find(s => s.id === selectedAppointment.serviceId)?.name) ?? '-'}</div>
-                                        <div className="font-medium">{selectedAppointment.service?.price ?? (services.find(s => s.id === selectedAppointment.serviceId)?.price) ?? 0}đ</div>
+                                        <div>
+                                            <div className="font-medium">{selectedAppointment.serviceName ?? selectedAppointment.service?.name ?? '-'}</div>
+                                            {selectedAppointment.serviceDurationMinutes && (
+                                                <div className="text-xs text-gray-500 mt-1">{selectedAppointment.serviceDurationMinutes} phút</div>
+                                            )}
+                                        </div>
+                                        <div className="text-right">
+                                            <div className="font-medium">{(selectedAppointment.serviceTotalPrice ?? selectedAppointment.servicePrice ?? 0).toLocaleString('vi-VN')}đ</div>
+                                            {selectedAppointment.serviceDiscountPercent != null && selectedAppointment.serviceDiscountPercent > 0 && (
+                                                <div className="text-xs text-green-600 mt-1">-{selectedAppointment.serviceDiscountPercent}%</div>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -979,15 +1074,37 @@ const ProfilePage: React.FC = () => {
 
                                 <div className="border border-gray-300 rounded p-3">
                                     <div className="text-xs text-gray-400">Tóm tắt thanh toán</div>
-                                    <div className="mt-2 text-sm grid grid-cols-2 gap-2">
-                                        <div className="text-gray-600">Giá dịch vụ</div>
-                                        <div className="text-right">{selectedAppointment.service?.price ?? (services.find(s => s.id === selectedAppointment.serviceId)?.price) ?? 0}đ</div>
-                                        <div className="text-gray-600">Tổng thuốc</div>
-                                        <div className="text-right">{selectedPrescription ? (selectedPrescription.totalAmount ?? 0) + 'đ' : '0đ'}</div>
-                                        <div className="text-gray-600">Giảm giá</div>
-                                        <div className="text-right">{selectedPrescription ? ((selectedPrescription.discountAmount ?? 0) + (selectedPrescription.discountPercent ? ("" + selectedPrescription.discountPercent + "%") : "")) || '0' : '0đ'}</div>
-                                        <div className="text-gray-600 font-medium">Tổng cần thanh toán</div>
-                                        <div className="text-right font-semibold">{payAmount ?? 0}đ</div>
+                                    <div className="mt-2 text-sm space-y-2">
+                                        <div className="flex justify-between">
+                                            <div className="text-gray-600">Giá dịch vụ gốc</div>
+                                            <div className="text-right">{(selectedAppointment.servicePrice ?? 0).toLocaleString('vi-VN')}đ</div>
+                                        </div>
+                                        {selectedAppointment.serviceDiscountPercent != null && selectedAppointment.serviceDiscountPercent > 0 && (
+                                            <div className="flex justify-between text-green-600">
+                                                <div>Giảm giá dịch vụ ({selectedAppointment.serviceDiscountPercent}%)</div>
+                                                <div className="text-right">-{((selectedAppointment.servicePrice ?? 0) * (selectedAppointment.serviceDiscountPercent / 100)).toLocaleString('vi-VN')}đ</div>
+                                            </div>
+                                        )}
+                                        {selectedAppointment.serviceTotalPrice && selectedAppointment.serviceTotalPrice !== selectedAppointment.servicePrice && (
+                                            <div className="flex justify-between font-medium">
+                                                <div className="text-gray-700">Tổng dịch vụ</div>
+                                                <div className="text-right">{selectedAppointment.serviceTotalPrice.toLocaleString('vi-VN')}đ</div>
+                                            </div>
+                                        )}
+                                        <div className="flex justify-between">
+                                            <div className="text-gray-600">Tổng thuốc</div>
+                                            <div className="text-right">{selectedPrescription ? (selectedPrescription.totalAmount ?? 0).toLocaleString('vi-VN') + 'đ' : '0đ'}</div>
+                                        </div>
+                                        {selectedPrescription && (selectedPrescription.discountAmount || selectedPrescription.discountPercent) && (
+                                            <div className="flex justify-between text-green-600">
+                                                <div>Giảm giá thuốc{selectedPrescription.discountPercent ? ` (${selectedPrescription.discountPercent}%)` : ''}</div>
+                                                <div className="text-right">-{(selectedPrescription.discountAmount ?? 0).toLocaleString('vi-VN')}đ</div>
+                                            </div>
+                                        )}
+                                        <div className="border-t pt-2 flex justify-between font-semibold text-base">
+                                            <div className="text-gray-800">Tổng cần thanh toán</div>
+                                            <div className="text-right text-indigo-600">{(payAmount ?? 0).toLocaleString('vi-VN')}đ</div>
+                                        </div>
                                     </div>
                                 </div>
 

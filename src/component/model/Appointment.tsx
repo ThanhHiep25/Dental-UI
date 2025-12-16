@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
 import { getServices, Service } from '@/services/services';
 // dentist selection removed per request
 import { sendConsultation, quickBooking, validateQuickBooking, QuickBookingPayload } from '@/services/appointment';
 import { UserAPI, ApiResponse, UserProfile } from '@/services/user';
-import { Dentist, DentistAPI } from '@/services/dentist';
+import { Dentist, DentistAPI, DentistDayData, DentistAppointment } from '@/services/dentist';
 import { Branch, BranchAPI } from '@/services/branches';
 
 interface AppointmentModalProps {
@@ -45,6 +45,127 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
 
     const [consultationMethod, setConsultationMethod] = useState('Zalo');
     const [consultationContent, setConsultationContent] = useState('');
+
+    // State for available time slots
+    const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+    const [bookedSlots, setBookedSlots] = useState<string[]>([]); // Slots that are booked
+    const [pastSlots, setPastSlots] = useState<string[]>([]); // Slots that are in the past (for today)
+    const [loadingSlots, setLoadingSlots] = useState(false);
+    const [dentistDayData, setDentistDayData] = useState<DentistDayData | null>(null);
+
+    // Working hours configuration (8:00 - 20:00)
+    const WORK_START_HOUR = 8;
+    const WORK_END_HOUR = 20;
+    const SLOT_INTERVAL_MINUTES = 30; // 30-minute slots
+
+    // Calculate all time slots and categorize them
+    const calculateAllSlots = useCallback((appointments: DentistAppointment[], selectedDate: string): { available: string[], booked: string[], past: string[] } => {
+        const available: string[] = [];
+        const booked: string[] = [];
+        const past: string[] = [];
+        const now = new Date();
+        const selectedDateObj = new Date(selectedDate);
+        const isToday = selectedDateObj.toDateString() === now.toDateString();
+
+        // Generate all possible slots from 8:00 to 20:00
+        for (let hour = WORK_START_HOUR; hour < WORK_END_HOUR; hour++) {
+            for (let minute = 0; minute < 60; minute += SLOT_INTERVAL_MINUTES) {
+                const slotTime = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+                
+                // If today, check if slot is in the past
+                if (isToday) {
+                    const slotDateTime = new Date(selectedDate);
+                    slotDateTime.setHours(hour, minute, 0, 0);
+                    if (slotDateTime <= now) {
+                        past.push(slotTime);
+                        continue;
+                    }
+                }
+
+                // Check if this slot conflicts with any appointment
+                let isBooked = false;
+                const slotStart = hour * 60 + minute; // in minutes from midnight
+                const slotEnd = slotStart + SLOT_INTERVAL_MINUTES; // slot end time
+
+                for (const apt of appointments) {
+                    // Parse appointment times (they are in UTC, need to convert to local)
+                    const aptStart = new Date(apt.scheduledTime);
+                    const aptEnd = new Date(apt.endTime);
+                    
+                    // Convert to local minutes from midnight
+                    const aptStartMinutes = aptStart.getHours() * 60 + aptStart.getMinutes();
+                    const aptEndMinutes = aptEnd.getHours() * 60 + aptEnd.getMinutes();
+
+                    // Check overlap: Two intervals [A, B) and [C, D) overlap if A < D AND C < B
+                    // Slot interval: [slotStart, slotEnd)
+                    // Appointment interval: [aptStartMinutes, aptEndMinutes)
+                    // They overlap if: slotStart < aptEndMinutes AND aptStartMinutes < slotEnd
+                    if (slotStart < aptEndMinutes && aptStartMinutes < slotEnd) {
+                        isBooked = true;
+                        break;
+                    }
+                }
+
+                if (isBooked) {
+                    booked.push(slotTime);
+                } else {
+                    available.push(slotTime);
+                }
+            }
+        }
+
+        return { available, booked, past };
+    }, []);
+
+    // Fetch dentist appointments when date or dentistId changes
+    useEffect(() => {
+        if (!isOpen || !date || dentistId === '') {
+            setAvailableSlots([]);
+            setBookedSlots([]);
+            setPastSlots([]);
+            setDentistDayData(null);
+            return;
+        }
+
+        const fetchDentistSchedule = async () => {
+            setLoadingSlots(true);
+            try {
+                const res = await DentistAPI.getDentistsByDay(date);
+                if (res.success && res.data) {
+                    const dentistData = res.data.find(d => d.dentistId === Number(dentistId));
+                    if (dentistData) {
+                        setDentistDayData(dentistData);
+                        const { available, booked, past } = calculateAllSlots(dentistData.appointments, date);
+                        setAvailableSlots(available);
+                        setBookedSlots(booked);
+                        setPastSlots(past);
+                    } else {
+                        // Dentist not found in response, assume all slots available
+                        setDentistDayData(null);
+                        const { available, booked, past } = calculateAllSlots([], date);
+                        setAvailableSlots(available);
+                        setBookedSlots(booked);
+                        setPastSlots(past);
+                    }
+                } else {
+                    setAvailableSlots([]);
+                    setBookedSlots([]);
+                    setPastSlots([]);
+                    setDentistDayData(null);
+                }
+            } catch (err) {
+                console.error('Failed to fetch dentist schedule', err);
+                setAvailableSlots([]);
+                setBookedSlots([]);
+                setPastSlots([]);
+                setDentistDayData(null);
+            } finally {
+                setLoadingSlots(false);
+            }
+        };
+
+        fetchDentistSchedule();
+    }, [isOpen, date, dentistId, calculateAllSlots]);
 
     // client-side min date for date input (YYYY-MM-DD)
     const todayIso = new Date().toISOString().slice(0, 10);
@@ -648,13 +769,171 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-purple-700">Ngày</label>
-                                        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} min={todayIso} className="w-full mt-1 p-3 border-b-2 border-b-yellow-400 border-gray-300 focus:outline-none" required />
+                                        <input type="date" value={date} onChange={(e) => { setDate(e.target.value); setTime(''); }} min={todayIso} className="w-full mt-1 p-3 border-b-2 border-b-yellow-400 border-gray-300 focus:outline-none" required />
                                     </div>
                                     <div>
                                         <label className="block text-purple-700">Giờ</label>
-                                        <input type="time" value={time} onChange={(e) => setTime(e.target.value)} min="08:00" max="20:00" className="w-full mt-1 p-3 border-b-2 border-b-yellow-400 border-gray-300 focus:outline-none" required />
+                                        <input type="time" readOnly value={time} onChange={(e) => setTime(e.target.value)} min="08:00" max="20:00" className="w-full mt-1 p-3 border-b-2 border-b-yellow-400 border-gray-300 focus:outline-none" required />
                                     </div>
                                 </div>
+
+                                {/* Available Time Slots */}
+                                {date && dentistId !== '' && (
+                                    <div className="mt-4">
+                                        <label className="block text-purple-700 mb-2">
+                                            Chọn khung giờ
+                                            {dentistDayData && (
+                                                <span className="text-sm text-gray-500 ml-2">
+                                                    ({dentistDayData.totalAppointments} lịch hẹn trong ngày)
+                                                </span>
+                                            )}
+                                        </label>
+
+                                        {/* Legend */}
+                                        <div className="flex flex-wrap gap-4 mb-3 text-xs">
+                                            <div className="flex items-center gap-1">
+                                                <span className="w-4 h-4 rounded bg-white border border-purple-300"></span>
+                                                <span className="text-gray-600">Còn trống</span>
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                                <span className="w-4 h-4 rounded bg-red-100 border border-red-300"></span>
+                                                <span className="text-gray-600">Đã có lịch</span>
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                                <span className="w-4 h-4 rounded bg-gray-200 border border-gray-300"></span>
+                                                <span className="text-gray-600">Đã qua</span>
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                                <span className="w-4 h-4 rounded bg-purple-600"></span>
+                                                <span className="text-gray-600">Đang chọn</span>
+                                            </div>
+                                        </div>
+                                        
+                                        {loadingSlots ? (
+                                            <div className="flex items-center justify-center py-4">
+                                                <svg className="animate-spin h-6 w-6 text-purple-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                <span className="ml-2 text-gray-600">Đang tải lịch...</span>
+                                            </div>
+                                        ) : (availableSlots.length > 0 || bookedSlots.length > 0 || pastSlots.length > 0) ? (
+                                            <div className="grid grid-cols-4 md:grid-cols-6 gap-2 max-h-48 overflow-y-auto p-2 border border-purple-200 rounded-xl bg-purple-50/30">
+                                                {/* Past slots - disabled and grayed out */}
+                                                {pastSlots.map((slot) => (
+                                                    <div
+                                                        key={`past-${slot}`}
+                                                        className="p-2 rounded-lg text-sm font-medium bg-gray-200 text-gray-400 border border-gray-300 cursor-not-allowed line-through text-center"
+                                                        title="Khung giờ đã qua"
+                                                    >
+                                                        {slot}
+                                                    </div>
+                                                ))}
+                                                
+                                                {/* Generate slots in order from 8:00 to 20:00 */}
+                                                {(() => {
+                                                    const allSlots: { time: string; status: 'available' | 'booked' | 'past' }[] = [];
+                                                    for (let hour = WORK_START_HOUR; hour < WORK_END_HOUR; hour++) {
+                                                        for (let minute = 0; minute < 60; minute += SLOT_INTERVAL_MINUTES) {
+                                                            const slotTime = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+                                                            if (pastSlots.includes(slotTime)) {
+                                                                allSlots.push({ time: slotTime, status: 'past' });
+                                                            } else if (bookedSlots.includes(slotTime)) {
+                                                                allSlots.push({ time: slotTime, status: 'booked' });
+                                                            } else if (availableSlots.includes(slotTime)) {
+                                                                allSlots.push({ time: slotTime, status: 'available' });
+                                                            }
+                                                        }
+                                                    }
+                                                    return allSlots.map((slot) => {
+                                                        if (slot.status === 'past') {
+                                                            return (
+                                                                <div
+                                                                    key={`slot-${slot.time}`}
+                                                                    className="p-2 rounded-lg text-sm font-medium bg-gray-200 text-gray-400 border border-gray-300 cursor-not-allowed line-through text-center"
+                                                                    title="Khung giờ đã qua"
+                                                                >
+                                                                    {slot.time}
+                                                                </div>
+                                                            );
+                                                        }
+                                                        if (slot.status === 'booked') {
+                                                            return (
+                                                                <div
+                                                                    key={`slot-${slot.time}`}
+                                                                    className="p-2 rounded-lg text-sm font-medium bg-red-100 text-red-400 border border-red-300 cursor-not-allowed text-center relative"
+                                                                    title="Nha sĩ đã có lịch hẹn"
+                                                                >
+                                                                    {slot.time}
+                                                                    <svg className="w-3 h-3 absolute top-1 right-1 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                                                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                                                                    </svg>
+                                                                </div>
+                                                            );
+                                                        }
+                                                        // Available slot
+                                                        return (
+                                                            <motion.button
+                                                                key={`slot-${slot.time}`}
+                                                                type="button"
+                                                                whileHover={{ scale: 1.05 }}
+                                                                whileTap={{ scale: 0.95 }}
+                                                                onClick={() => setTime(slot.time)}
+                                                                className={`p-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                                                    time === slot.time
+                                                                        ? 'bg-purple-600 text-white shadow-md'
+                                                                        : 'bg-white text-purple-700 border border-purple-300 hover:bg-purple-100'
+                                                                }`}
+                                                            >
+                                                                {slot.time}
+                                                            </motion.button>
+                                                        );
+                                                    });
+                                                })()}
+                                            </div>
+                                        ) : (
+                                            <div className="text-center py-4 text-orange-600 bg-orange-50 rounded-xl border border-orange-200">
+                                                <svg className="w-8 h-8 mx-auto mb-2 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                                Nha sĩ đã kín lịch trong ngày này. Vui lòng chọn ngày khác.
+                                            </div>
+                                        )}
+
+                                        {/* Show dentist's booked appointments for reference */}
+                                        {dentistDayData && dentistDayData.appointments.length > 0 && (
+                                            <div className="mt-3 p-3 bg-gray-50 rounded-xl border border-gray-200">
+                                                <p className="text-sm text-gray-600 font-medium mb-2">Chi tiết lịch đã đặt của nha sĩ:</p>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {dentistDayData.appointments.map((apt) => {
+                                                        const startTime = new Date(apt.scheduledTime);
+                                                        const endTime = new Date(apt.endTime);
+                                                        const startStr = `${String(startTime.getHours()).padStart(2, '0')}:${String(startTime.getMinutes()).padStart(2, '0')}`;
+                                                        const endStr = `${String(endTime.getHours()).padStart(2, '0')}:${String(endTime.getMinutes()).padStart(2, '0')}`;
+                                                        return (
+                                                            <span
+                                                                key={apt.id}
+                                                                className="px-2 py-1 text-xs bg-red-100 text-red-700 rounded-lg"
+                                                            >
+                                                                {startStr} - {endStr}
+                                                            </span>
+                                                        );
+                                                    })}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Hint when date or dentist not selected */}
+                                {(!date || dentistId === '') && (
+                                    <div className="mt-4 p-3 bg-blue-50 rounded-xl border border-blue-200 text-blue-700 text-sm">
+                                        <svg className="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Vui lòng chọn ngày và nha sĩ để xem khung giờ còn trống.
+                                    </div>
+                                )}
 
                                 {/* {feedback && <div className={`p-3 rounded-md ${feedback.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>{feedback.message}</div>} */}
 

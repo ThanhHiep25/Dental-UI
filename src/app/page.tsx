@@ -2,6 +2,8 @@
 
 import LadingPage from "@/component/lading/page";
 import AppointmentModal from "@/component/model/Appointment";
+import AuthModal from "@/component/auth/AuthForms";
+import { UserObject } from "@/type/user";
 import { motion } from "framer-motion";
 import { CalendarHeart, MapPin, MessagesSquare, PhoneCall } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -15,6 +17,14 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   const [isOpenModelAppoit, setIsOpenModelAppoit] = useState(false);
+  const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
+
+  // Kiểm tra người dùng đã đăng nhập chưa
+  const isLoggedIn = (): boolean => {
+    if (typeof window === 'undefined') return false;
+    const token = localStorage.getItem('accessToken');
+    return !!token;
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,12 +35,29 @@ export default function Home() {
 
 
   const handleOpenModal = () => {
-    setIsOpenModelAppoit(true);
+    if (isLoggedIn()) {
+      setIsOpenModelAppoit(true);
+    } else {
+      setIsOpenAuthModal(true);
+    }
   };
 
   // Hàm để đóng modal
   const handleCloseModal = () => {
     setIsOpenModelAppoit(false);
+  };
+
+  // Hàm để đóng modal auth
+  const handleCloseAuthModal = () => {
+    setIsOpenAuthModal(false);
+  };
+
+  // Hàm xử lý khi đăng nhập thành công
+  const handleAuthSuccess = (user: UserObject) => {
+    console.log('Đăng nhập thành công:', user);
+    setIsOpenAuthModal(false);
+    // Mở modal đặt lịch hẹn sau khi đăng nhập thành công
+    setIsOpenModelAppoit(true);
   };
 
   useEffect(() => {
@@ -150,6 +177,13 @@ export default function Home() {
       <AppointmentModal
         isOpen={isOpenModelAppoit}
         onClose={handleCloseModal}
+      />
+
+      {/* Modal đăng nhập */}
+      <AuthModal
+        isOpen={isOpenAuthModal}
+        onClose={handleCloseAuthModal}
+        onSuccess={handleAuthSuccess}
       />
     </div>
   );

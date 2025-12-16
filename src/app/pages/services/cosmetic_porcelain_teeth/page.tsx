@@ -9,12 +9,23 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react';
 import AppointmentModal from '@/component/model/Appointment';
+import AuthModal from '@/component/auth/AuthForms';
 import { useTranslation } from "react-i18next";
 
 const CosmeticPorcelainTeeth: React.FC = () => {
 
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
+    const [authOpen, setAuthOpen] = useState(false);
+
+    const handleBookAppointment = () => {
+      const user = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+      if (!user) {
+        setAuthOpen(true);
+      } else {
+        setOpen(true);
+      }
+    };
 
 
 
@@ -207,7 +218,7 @@ const CosmeticPorcelainTeeth: React.FC = () => {
                         Thông thường các ca răng sứ toàn hàm có thể hoàn thành trong vòng 2-3 ngày.
                     </p>
 
-                    <button onClick={() => setOpen(true)} className="text-white cursor-pointer md:w-96 w-60  bg-purple-800 hover:bg-purple-900 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-lg px-5 py-6 text-center">
+                    <button onClick={handleBookAppointment} className="text-white cursor-pointer md:w-96 w-60  bg-purple-800 hover:bg-purple-900 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-lg px-5 py-6 text-center">
                         {t('book_appointment_free')}
                     </button>
                 </motion.div>
@@ -289,7 +300,7 @@ const CosmeticPorcelainTeeth: React.FC = () => {
                     transition={{ duration: 0.5 }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => setOpen(true)}
+                    onClick={handleBookAppointment}
                     className="text-white cursor-pointer md:w-96 w-70  mx-auto bg-teal-400 hover:bg-purple-900 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-lg px-5 py-6 text-center">
                     Đặt Lịch Hẹn Hồi Sinh Nụ Cười
                 </motion.button>
@@ -323,7 +334,7 @@ const CosmeticPorcelainTeeth: React.FC = () => {
 
                 <h3 className="text-2xl font-bold text-white roboto-900 mt-10 text-center">Răng sứ sẽ khôi phục các khuyết điểm của nụ cười</h3>
 
-                <button onClick={() => setOpen(true)} className="text-white cursor-pointer md:w-96 w-70  mx-auto bg-teal-400 hover:bg-purple-900 focus:ring-4 focus:outline-none focus:ring-purple-300 font-bold rounded-full text-lg px-5 py-6 text-center">
+                <button onClick={handleBookAppointment} className="text-white cursor-pointer md:w-96 w-70  mx-auto bg-teal-400 hover:bg-purple-900 focus:ring-4 focus:outline-none focus:ring-purple-300 font-bold rounded-full text-lg px-5 py-6 text-center">
                     Đặt Lịch Hẹn Tư Vấn Răng Sứ
                 </button>
             </section>
@@ -354,7 +365,7 @@ const CosmeticPorcelainTeeth: React.FC = () => {
 
                 <h3 className='text-center text-2xl font-bold text-teal-700 roboto-900'>Cần thau đổi nụ cười toàn diện ?</h3>
                 <h3 className='text-center text-2xl font-bold text-teal-700 roboto-900'>Hãy liên hệ với đội ngũ y bác sĩ của chúng tôi.</h3>
-                <button onClick={() => setOpen(true)} className="text-white cursor-pointer md:w-96 w-70 mx-auto bg-teal-400 hover:bg-purple-900 focus:ring-4 focus:outline-none focus:ring-purple-300 font-bold rounded-full text-lg px-5 py-6 text-center">
+                <button onClick={handleBookAppointment} className="text-white cursor-pointer md:w-96 w-70 mx-auto bg-teal-400 hover:bg-purple-900 focus:ring-4 focus:outline-none focus:ring-purple-300 font-bold rounded-full text-lg px-5 py-6 text-center">
                     Đặt Lịch Hẹn Ngay
                 </button>
             </section>
@@ -395,7 +406,7 @@ const CosmeticPorcelainTeeth: React.FC = () => {
                     transition={{ duration: 0.8 }}
                 className='max-w-7xl md:max-w-5xl text-center text-lg mx-auto text-white'>Hãy để đội ngũ bác sĩ và kỹ thuật viên giàu kinh nghiệm của chúng tôi giúp bạn hồi sinh nụ cười và nâng cao chất lượng sống.
                     Chúng tôi cam kết mang đến cho bạn dịch vụ nha khoa thẩm mỹ tốt nhất với công nghệ hiện đại và vật liệu sứ cao cấp.</motion.p>
-                <button onClick={() => setOpen(true)} className="text-white cursor-pointer md:w-96 w-70  mx-auto bg-teal-400 hover:bg-purple-900 focus:ring-4 focus:outline-none focus:ring-purple-300 font-bold rounded-full text-lg px-5 py-6 text-center">
+                <button onClick={handleBookAppointment} className="text-white cursor-pointer md:w-96 w-70  mx-auto bg-teal-400 hover:bg-purple-900 focus:ring-4 focus:outline-none focus:ring-purple-300 font-bold rounded-full text-lg px-5 py-6 text-center">
                     Đặt Lịch Hẹn Tư Vấn Răng Sứ
                 </button>
             </section>
@@ -405,6 +416,14 @@ const CosmeticPorcelainTeeth: React.FC = () => {
             onClose={() => setOpen(false)}
             defaultTab="appointment"
             defaultServiceSlug="Răng Sứ Thẩm Mỹ từ cơ bản đến cao cấp"
+        />
+        <AuthModal
+          isOpen={authOpen}
+          onClose={() => setAuthOpen(false)}
+          onSuccess={() => {
+            setAuthOpen(false);
+            setOpen(true);
+          }}
         />
         </div>
     )

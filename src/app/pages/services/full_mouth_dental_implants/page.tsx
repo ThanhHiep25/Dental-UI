@@ -2,9 +2,20 @@
 
 import{ useState } from 'react';
 import AppointmentModal from '@/component/model/Appointment';
+import AuthModal from '@/component/auth/AuthForms';
 
 const FullMouthDentalImplants: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
+
+  const handleBookAppointment = () => {
+    const user = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+    if (!user) {
+      setAuthOpen(true);
+    } else {
+      setOpen(true);
+    }
+  };
   return (
     <div className="">
       <section>
@@ -21,7 +32,7 @@ const FullMouthDentalImplants: React.FC = () => {
             pháp toàn diện giúp bạn khắc phục những vấn đề này.
           </p>
           <div className="">
-            <button onClick={() => setOpen(true)} className="w-[400px] h-[50px] bg-amber-500 rounded-2xl flex items-center justify-center ">
+            <button onClick={handleBookAppointment} className="w-[400px] h-[50px] bg-amber-500 rounded-2xl flex items-center justify-center ">
                 Đăt lịch ngay
             </button>
           </div>
@@ -32,6 +43,14 @@ const FullMouthDentalImplants: React.FC = () => {
         onClose={() => setOpen(false)}
         defaultTab="appointment"
         defaultServiceSlug="Implant Toàn Hàm Giải Pháp Toàn Diện Cho Người Mất Răng"
+      />
+      <AuthModal
+        isOpen={authOpen}
+        onClose={() => setAuthOpen(false)}
+        onSuccess={() => {
+          setAuthOpen(false);
+          setOpen(true);
+        }}
       />
     </div>
   );

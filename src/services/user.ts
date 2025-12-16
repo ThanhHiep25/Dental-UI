@@ -81,21 +81,50 @@ export interface AppointmentHistory {
   note?: string | null;
   createdAt?: string;
   updatedAt?: string;
+  endTime?: string;
+  label?: string;
 
   // Customer info
   customerId?: number;
   customerUsername?: string;
   customerName?: string | null;
+  customerEmail?: string;
+  customer?: {
+    id: number;
+    username: string;
+    email: string;
+    fullName?: string;
+    phone?: string | null;
+  };
 
   // Dentist / assistant / receptionist
   dentistId?: number | null;
+  dentistRefId?: number | null;
   dentistUsername?: string | null;
   dentistName?: string | null;
+  dentistSpecialization?: string;
+  dentist?: {
+    id: number;
+    refId?: number;
+    name: string;
+    email?: string;
+    phone?: string;
+    specialization?: string;
+  };
+  
   assistantId?: number | null;
   assistantName?: string | null;
+  assistant?: Record<string, unknown>;
+  
   receptionistId?: number | null;
   receptionistUsername?: string | null;
   receptionistName?: string | null;
+  receptionist?: {
+    id: number;
+    username: string;
+    email: string;
+    fullName?: string;
+  };
 
   // Service info - some endpoints return nested `service`, others return `serviceId`/`serviceName`
   service?: Service | null;
@@ -105,9 +134,23 @@ export interface AppointmentHistory {
   // Branch / location
   branchId?: number | null;
   branchName?: string | null;
+  branchAddress?: string;
+  branch?: {
+    id: number;
+    name: string;
+    address?: string;
+    phone?: string | null;
+  };
 
   // Other fields
   estimatedMinutes?: number | null;
+  
+  // Service pricing info from API response
+  serviceDuration?: number | null;
+  serviceDurationMinutes?: number;
+  servicePrice?: number;
+  serviceTotalPrice?: number;
+  serviceDiscountPercent?: number;
 }
 
 export const UserAPI = {

@@ -5,19 +5,46 @@ import { CalendarClockIcon, GroupIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import AppointmentModal from '../model/Appointment';
+import AuthModal from '../auth/AuthForms';
+import { UserObject } from '../../type/user';
 
 const LadingPage: React.FC = () => {
     const { t } = useTranslation();
     const [isopenModelAppoint, setIsOpenModelAppoint] = useState(false);
+    const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
 
-    // Hàm để mở modal
+    // Kiểm tra người dùng đã đăng nhập chưa
+    const isLoggedIn = (): boolean => {
+        if (typeof window === 'undefined') return false;
+        const token = localStorage.getItem('accessToken');
+        return !!token;
+    };
+
+    // Hàm để mở modal - kiểm tra đăng nhập trước
     const handleOpenModal = () => {
-        setIsOpenModelAppoint(true);
+        if (isLoggedIn()) {
+            setIsOpenModelAppoint(true);
+        } else {
+            setIsOpenAuthModal(true);
+        }
     };
 
     // Hàm để đóng modal
     const handleCloseModal = () => {
         setIsOpenModelAppoint(false);
+    };
+
+    // Hàm để đóng modal auth
+    const handleCloseAuthModal = () => {
+        setIsOpenAuthModal(false);
+    };
+
+    // Hàm xử lý khi đăng nhập thành công
+    const handleAuthSuccess = (user: UserObject) => {
+        console.log('Đăng nhập thành công:', user);
+        setIsOpenAuthModal(false);
+        // Mở modal đặt lịch hẹn sau khi đăng nhập thành công
+        setIsOpenModelAppoint(true);
     };
 
     // Mảng chứa các đường dẫn ảnh cho slideshow
@@ -217,6 +244,13 @@ const LadingPage: React.FC = () => {
             <AppointmentModal
                 isOpen={isopenModelAppoint}
                 onClose={handleCloseModal}
+            />
+
+            {/* Modal đăng nhập */}
+            <AuthModal
+                isOpen={isOpenAuthModal}
+                onClose={handleCloseAuthModal}
+                onSuccess={handleAuthSuccess}
             />
         </div>
     );

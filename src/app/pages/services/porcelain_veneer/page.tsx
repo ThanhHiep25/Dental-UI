@@ -4,9 +4,20 @@ import React, { useState } from 'react';
 import { CircleCheck } from "lucide-react";
 import {motion} from 'framer-motion'
 import AppointmentModal from '@/component/model/Appointment';
+import AuthModal from '@/component/auth/AuthForms';
 
 const PorcelainVeneer: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
+
+  const handleBookAppointment = () => {
+    const user = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+    if (!user) {
+      setAuthOpen(true);
+    } else {
+      setOpen(true);
+    }
+  };
   return (
     <div className="">
       <section className="flex flex-row items-center justify-center   ">
@@ -20,7 +31,7 @@ const PorcelainVeneer: React.FC = () => {
             giải pháp tái tạo nụ cười không làm tổn thương răng và nhanh chóng
             nhất cho bạn.
           </p>
-          <button onClick={() => setOpen(true)} className="w-[200px] h-[60px] bg-amber-500 rounded-2xl">
+          <button onClick={handleBookAppointment} className="w-[200px] h-[60px] bg-amber-500 rounded-2xl">
             Đặt lịch ngay
           </button>
         </div>
@@ -78,7 +89,7 @@ const PorcelainVeneer: React.FC = () => {
               </p>
             </p>
             <div className="w-full flex justify-center mt-5">
-              <button onClick={() => setOpen(true)} className="w-[400px] h-[60px] bg-amber-500 rounded-2xl">
+              <button onClick={handleBookAppointment} className="w-[400px] h-[60px] bg-amber-500 rounded-2xl">
                 Đặt lịch ngay
               </button>
             </div>
@@ -145,6 +156,14 @@ const PorcelainVeneer: React.FC = () => {
         onClose={() => setOpen(false)}
         defaultTab="appointment"
         defaultServiceSlug="Dán sứ Veneer"
+      />
+      <AuthModal
+        isOpen={authOpen}
+        onClose={() => setAuthOpen(false)}
+        onSuccess={() => {
+          setAuthOpen(false);
+          setOpen(true);
+        }}
       />
     </div>
   );

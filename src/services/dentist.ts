@@ -11,6 +11,29 @@ export interface Dentist {
   bio: string;
 }
 
+export interface DentistAppointment {
+  id: number;
+  scheduledTime: string;
+  endTime: string;
+  estimatedMinutes: number;
+  serviceId: number;
+  status: string;
+}
+
+export interface DentistDayData {
+  dentistId: number;
+  dentistName: string;
+  appointments: DentistAppointment[];
+  totalAppointments: number;
+}
+
+export interface DentistsDayResponse {
+  success: boolean;
+  date: string;
+  totalDentists: number;
+  data: DentistDayData[];
+}
+
 export interface GetDentistsResponse {
   success: boolean;
   message: string;
@@ -94,6 +117,28 @@ export const DentistAPI = {
         success: false,
         message,
         data
+      };
+    }
+  },
+
+  // Get dentists appointments by day
+  getDentistsByDay: async (date: string): Promise<DentistsDayResponse> => {
+    try {
+      const res = await http.get<DentistsDayResponse>(`/api/appointments/dentists/day?date=${date}`);
+      return res.data;
+    } catch (error: unknown) {
+      let message = "Unknown error";
+      if (typeof error === "object" && error !== null) {
+        // @ts-expect-error: may have response property
+        message = error.response?.data?.message || (error as Error).message || message;
+      } else if (typeof error === "string") {
+        message = error;
+      }
+      return {
+        success: false,
+        date,
+        totalDentists: 0,
+        data: []
       };
     }
   }

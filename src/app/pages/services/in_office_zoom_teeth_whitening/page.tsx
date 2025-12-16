@@ -1,8 +1,20 @@
 "use client";
 import React, { useState } from 'react';
 import AppointmentModal from '@/component/model/Appointment';
+import AuthModal from '@/component/auth/AuthForms';
+
 const InOfficeZoomTeethWhitening : React.FC = () => {
     const [open, setOpen] = useState(false);
+    const [authOpen, setAuthOpen] = useState(false);
+
+    const handleBookAppointment = () => {
+      const user = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+      if (!user) {
+        setAuthOpen(true);
+      } else {
+        setOpen(true);
+      }
+    };
     return (
         
         <div className="">
@@ -14,7 +26,7 @@ const InOfficeZoomTeethWhitening : React.FC = () => {
                     Phương pháp hiệu quả và nhanh nhất để có nụ cười tươi mới chỉ trong 45-60 phút. Bạn hoàn toàn có thể lựa chọn độ trắng tùy ý phù hợp với nhu cầu của mình.
                 </p>
                 <div className="">
-                    <button onClick={() => setOpen(true)} className="w-[400px] h-[50px] bg-amber-500 rounded-2xl flex items-center justify-center ">
+                    <button onClick={handleBookAppointment} className="w-[400px] h-[50px] bg-amber-500 rounded-2xl flex items-center justify-center ">
                         Đăt lịch ngay
                     </button>
                 </div>
@@ -25,6 +37,14 @@ const InOfficeZoomTeethWhitening : React.FC = () => {
           onClose={() => setOpen(false)}
           defaultTab="appointment"
           defaultServiceSlug="Tẩy trắng răng"
+        />
+        <AuthModal
+          isOpen={authOpen}
+          onClose={() => setAuthOpen(false)}
+          onSuccess={() => {
+            setAuthOpen(false);
+            setOpen(true);
+          }}
         />
         </div>
 );

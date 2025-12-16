@@ -44,7 +44,7 @@ const ScrollTop: React.FC = () => {
                 showChat && (
                     <button
                         onClick={toggleChatPopup}
-                        className="fixed bottom-60 right-8 z-30 bg-blue-400 hover:bg-blue-500 text-white p-4 rounded-full shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
+                        className="fixed bottom-40 right-8 z-30 bg-blue-400 hover:bg-blue-500 text-white p-4 rounded-full shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
                         aria-label="Trở về đầu trang"
                         style={{
                             boxShadow: "0 4px 24px 0 rgba(255, 193, 7, 0.4)",
@@ -68,7 +68,7 @@ const ScrollTop: React.FC = () => {
             {showTop && (
                 <button
                     onClick={scrollToTop}
-                    className="fixed bottom-35 right-8 z-30 bg-purple-400 hover:bg-purple-500 text-white p-2 rounded-full shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group animate-bounce"
+                    className="fixed bottom-20 right-8 z-30 bg-purple-400 hover:bg-purple-500 text-white p-2 rounded-full shadow-xl border-4 border-white  transition-all duration-300 flex items-center justify-center group "
                     aria-label="Trở về đầu trang"
                     style={{
                         boxShadow: "0 4px 24px 0 rgba(255, 193, 7, 0.4)",
