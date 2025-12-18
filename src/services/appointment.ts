@@ -101,11 +101,11 @@ export const validateQuickBooking = (payload: Partial<QuickBookingPayload>): { v
     if (typeof payload.serviceId !== 'number') errors.push('serviceId must be a number');
     // date must be yyyy-MM-dd
     if (!payload.date || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(payload.date)) {
-        errors.push('date must be in yyyy-MM-dd format');
+        errors.push('Vui lòng chọn ngày hợp lệ');
     }
     // time must be HH:mm
     if (!payload.time || !/^[0-9]{2}:[0-9]{2}$/.test(payload.time)) {
-        errors.push('time must be in HH:mm format');
+        errors.push('Vui lòng chọn thời gian');
     }
     // If date and time formats are OK, enforce business rules: not in the past and within allowed hours
     if (payload.date && payload.time && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(payload.date) && /^[0-9]{2}:[0-9]{2}$/.test(payload.time)) {
@@ -116,23 +116,23 @@ export const validateQuickBooking = (payload: Partial<QuickBookingPayload>): { v
             const scheduled = new Date(y, (m || 1) - 1, d || 1, hh || 0, mm || 0, 0, 0);
             const now = new Date();
             if (isNaN(scheduled.getTime())) {
-                errors.push('scheduled date/time is invalid');
+                errors.push('Ngày/giờ đặt lịch không hợp lệ');
             } else {
                 if (scheduled.getTime() < now.getTime()) {
-                    errors.push('Cannot book an appointment in the past');
+                    errors.push('Không thể đặt lịch hẹn trong quá khứ');
                 }
                 // allowed window: 08:00 - 20:00 (inclusive)
                 const minutes = (hh || 0) * 60 + (mm || 0);
                 const startMin = 8 * 60; // 08:00
                 const endMin = 20 * 60; // 20:00
                 if (minutes < startMin || minutes > endMin) {
-                    errors.push('Appointment time must be between 08:00 and 20:00');
+                    errors.push('Thời gian đặt lịch phải trong khoảng từ 08:00 đến 20:00');
                 }
             }
         } catch (err) {
             // include error in debug logs to help diagnose malformed inputs
             console.debug('validateQuickBooking parsing error', err);
-            errors.push('Failed to validate scheduled date/time');
+            errors.push('Không thể xác thực ngày/giờ đặt lịch');
         }
     }
     // dentistId optional but if provided must be number (null is allowed)

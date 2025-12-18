@@ -428,31 +428,89 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     console.error('Validation error', err);
                 }
 
-                const json = await quickBooking(payload);
-                if (json && json.success) {
-                    const msg = 'Lịch hẹn của bạn đã được đặt thành công. Chúng tôi sẽ liên hệ xác nhận với bạn sớm nhất';
-                    toast.success(msg, {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    });
-                    //setTimeout(() => onClose(), 1200);
-                    setName('');
-                    setEmail('');
-                    setPhone('');
-                    setDentistId('');
-                    setBranchId('');
-                    setServiceId('');
-                    setDate('');
-                    setTime('');
-                    setNotes('');
-                } else {
-                    const msg = json?.message || 'Đặt hẹn thất bại';
+                // Call booking API with defensive error handling so backend messages surface (e.g. trùng thời gian)
+                try {
+                    const json = await quickBooking(payload);
+                    if (json && json.success) {
+                        const msg = 'Lịch hẹn của bạn đã được đặt thành công. Chúng tôi sẽ liên hệ xác nhận với bạn sớm nhất';
+                        toast.success(msg, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        });
+                        setName('');
+                        setEmail('');
+                        setPhone('');
+                        setDentistId('');
+                        setBranchId('');
+                        setServiceId('');
+                        setDate('');
+                        setTime('');
+                        setNotes('');
+                    } else {
+                        const msg = json?.message || 'Đặt hẹn thất bại';
+                        toast.error(msg, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        });
+
+                        // Handle time conflict: clear time and refresh slots so user can re-pick
+                        if (msg && msg.includes('trùng thời gian')) {
+                            setTime('');
+                            if (date && dentistId !== '') {
+                                setLoadingSlots(true);
+                                try {
+                                    const res = await DentistAPI.getDentistsByDay(date);
+                                    if (res.success && res.data) {
+                                        const dentistData = res.data.find(d => d.dentistId === Number(dentistId));
+                                        if (dentistData) {
+                                            setDentistDayData(dentistData);
+                                            const { available, booked, past } = calculateAllSlots(dentistData.appointments || [], date);
+                                            setAvailableSlots(available);
+                                            setBookedSlots(booked);
+                                            setPastSlots(past);
+                                        } else {
+                                            // Dentist not in payload, assume free slots
+                                            setDentistDayData(null);
+                                            const { available, booked, past } = calculateAllSlots([], date);
+                                            setAvailableSlots(available);
+                                            setBookedSlots(booked);
+                                            setPastSlots(past);
+                                        }
+                                        toast.info('Danh sách khung giờ đã được cập nhật. Vui lòng chọn khung giờ khác.', {
+                                            position: "top-right",
+                                            autoClose: 4000,
+                                            hideProgressBar: false,
+                                            closeOnClick: true,
+                                            pauseOnHover: true,
+                                            draggable: true,
+                                            progress: undefined,
+                                            theme: "light",
+                                        });
+                                    }
+                                } catch (refreshErr) {
+                                    console.error('Failed to refresh slots after conflict', refreshErr);
+                                } finally {
+                                    setLoadingSlots(false);
+                                }
+                            }
+                        }
+                    }
+                } catch (bookingErr) {
+                    console.error('Booking error', bookingErr);
+                    const apiMsg = (bookingErr as any)?.response?.data?.message;
+                    const msg = apiMsg || 'Đặt hẹn thất bại';
                     toast.error(msg, {
                         position: "top-right",
                         autoClose: 5000,
@@ -463,6 +521,46 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                         progress: undefined,
                         theme: "light",
                     });
+
+                    if (msg && msg.includes('trùng thời gian')) {
+                        setTime('');
+                        if (date && dentistId !== '') {
+                            setLoadingSlots(true);
+                            try {
+                                const res = await DentistAPI.getDentistsByDay(date);
+                                if (res.success && res.data) {
+                                    const dentistData = res.data.find(d => d.dentistId === Number(dentistId));
+                                    if (dentistData) {
+                                        setDentistDayData(dentistData);
+                                        const { available, booked, past } = calculateAllSlots(dentistData.appointments || [], date);
+                                        setAvailableSlots(available);
+                                        setBookedSlots(booked);
+                                        setPastSlots(past);
+                                    } else {
+                                        setDentistDayData(null);
+                                        const { available, booked, past } = calculateAllSlots([], date);
+                                        setAvailableSlots(available);
+                                        setBookedSlots(booked);
+                                        setPastSlots(past);
+                                    }
+                                    toast.info('Danh sách khung giờ đã được cập nhật. Vui lòng chọn khung giờ khác.', {
+                                        position: "top-right",
+                                        autoClose: 4000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        theme: "light",
+                                    });
+                                }
+                            } catch (refreshErr) {
+                                console.error('Failed to refresh slots after conflict', refreshErr);
+                            } finally {
+                                setLoadingSlots(false);
+                            }
+                        }
+                    }
                 }
                 return;
             }
